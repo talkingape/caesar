@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
-<generatorConfiguration >
-<classPathEntry    location="E:\MavenRepository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
-  <context id="context1" >
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/caesar" userId="root" password="3864" />
-    <javaModelGenerator targetPackage="edu.sdut.model" targetProject="caesar" />
-    <sqlMapGenerator targetPackage="edu.sdut.mapper" targetProject="caesar" />
-    <javaClientGenerator targetPackage="edu.sdut.dao" targetProject="caesar" type="XMLMAPPER" />
-    <table schema="user" tableName="test" >
-    </table>
-  </context>
+<generatorConfiguration>
+	<classPathEntry
+		location="E:\MavenRepository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/caesar"
+			userId="root" password="3864" />
+		<javaModelGenerator targetPackage="edu.sdut.model" targetProject="caesar" />
+		<sqlMapGenerator targetPackage="edu.sdut.mapper" targetProject="caesar" />
+		<javaClientGenerator targetPackage="edu.sdut.dao" targetProject="caesar" type="XMLMAPPER" />
+		<table schema="UserInfo" tableName="user_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+		</table>
+		<table schema="UserAuthority" tableName="user_authority" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+		</table>
+		<table schema="UserActor" tableName="user_actor" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+		</table>
+	</context>
 </generatorConfiguration>
