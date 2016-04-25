@@ -7,10 +7,10 @@
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/caesar"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/caesar"
 			userId="root" password="3864" />
 		<javaModelGenerator targetPackage="edu.sdut.model" targetProject="caesar" />
-		<sqlMapGenerator targetPackage="edu.sdut.mapper" targetProject="caesar" />
+		<sqlMapGenerator targetPackage="edu.sdut.dao.mapper" targetProject="caesar" />
 		<javaClientGenerator targetPackage="edu.sdut.dao" targetProject="caesar" type="XMLMAPPER" />
 		<table schema="UserInfo" tableName="user_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
 		</table>
