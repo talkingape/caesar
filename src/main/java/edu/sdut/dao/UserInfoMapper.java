@@ -1,5 +1,7 @@
 package edu.sdut.dao;
 
+import java.util.*;
+
 import edu.sdut.model.UserInfo;
 
 public interface UserInfoMapper {
@@ -14,4 +16,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+    
+    UserInfo selectByNamePassword(HashMap<String,String> userInfo);
 }

@@ -103,4 +103,10 @@
       tel = #{tel,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByNamePassword" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+  	select
+  	<include refid="Base_Column_List" />
+  	from user_info
+  	where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>
