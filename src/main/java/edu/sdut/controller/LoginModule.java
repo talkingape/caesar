@@ -14,19 +14,20 @@ import edu.sdut.model.UserInfo;
 import edu.sdut.util.MD5Util;
 
 @Controller
-@RequestMapping("/login")
-public class Login {
+@RequestMapping("/loginModule")
+public class LoginModule {
 	
 	@Resource
 	UserInfoMapper userInfoMapper;
 	
 	@ResponseBody
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String validateLogin(HttpServletRequest request){
 		String inputCode = request.getParameter("inputCode");
+		inputCode=inputCode.toUpperCase();
 		String checkCode = (String) request.getSession().getAttribute("checkCode");
 		if (!inputCode.equals(checkCode)){
-			return "captchafailed";
+			return new String("captchafailed");
 		}
 		String userName = request.getParameter("userName");
 		String passWord = request.getParameter("passWord");
@@ -36,11 +37,17 @@ public class Login {
 		loginInfo.put("password", md5pwd);
 		UserInfo userInfo = userInfoMapper.selectByNamePassword(loginInfo);
 		if (userInfo==null) {
-			return "failed";
+			return new String("failed");
 		}else {
 			request.getSession().setAttribute("user", userInfo);
-			return "success";
+			return new String("success");
 		}
+	}
+	
+	@RequestMapping("/toLogin")
+	public String toLogin(HttpServletRequest request){
+		request.getSession().setAttribute("userInfo", null);
+		return "jsp/login";
 	}
 	
 }

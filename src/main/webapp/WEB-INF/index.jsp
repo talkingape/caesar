@@ -2,5 +2,5 @@
 	pageEncoding="utf-8"%>
 <%@include file="/jsp/header.jsp"%>
 <script>
-	window.location.href="{path}/jsp/login.jsp";
+	window.location.href="{path}/loginModule/tologin.php";
 </script>
