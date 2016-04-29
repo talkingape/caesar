@@ -4195,8 +4195,10 @@ S2.define('select2/dropdown/attachBody',[
       bottom: $window.scrollTop() + $window.height()
     };
 
-    var enoughRoomAbove = viewport.top < (offset.top - dropdown.height);
-    var enoughRoomBelow = viewport.bottom > (offset.bottom + dropdown.height);
+    //var enoughRoomAbove = viewport.top < (offset.top - dropdown.height);
+    var enoughRoomAbove = false;
+    //var enoughRoomBelow = viewport.bottom > (offset.bottom + dropdown.height);
+    var enoughRoomBelow = true;
 
     var css = {
       left: offset.left,

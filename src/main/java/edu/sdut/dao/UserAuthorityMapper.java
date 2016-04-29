@@ -1,5 +1,7 @@
 package edu.sdut.dao;
 
+import java.util.List;
+
 import edu.sdut.model.UserAuthority;
 
 public interface UserAuthorityMapper {
@@ -14,4 +16,6 @@ public interface UserAuthorityMapper {
     int updateByPrimaryKeySelective(UserAuthority record);
 
     int updateByPrimaryKey(UserAuthority record);
+    
+    List<UserAuthority> selectAllAuthority();
 }

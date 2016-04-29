@@ -1,5 +1,7 @@
 package edu.sdut.dao;
 
+import java.util.List;
+
 import edu.sdut.model.UserActor;
 
 public interface UserActorMapper {
@@ -14,4 +16,6 @@ public interface UserActorMapper {
     int updateByPrimaryKeySelective(UserActor record);
 
     int updateByPrimaryKey(UserActor record);
+    
+    List<UserActor> selectAllActor();
 }

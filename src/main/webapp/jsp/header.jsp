@@ -5,8 +5,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" type="text/css" href="${path}/js/easyui-1.4.5/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="${path}/js/easyui-1.4.5/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="${path}/js/select2-4.0.2/dist/css/select2.min.css">
-<script type="text/javascript" src="${path}/js/select2-4.0.2/dist/js/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${path}/js/select2-4.0.2/dist/css/select2.css">
 <script type="text/javascript" src="${path}/js/jquery-1.12.3/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="${path}/js/select2-4.0.2/dist/js/select2.js"></script>
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
