@@ -24,7 +24,7 @@
 	<div
 		style="height: auto; width: 32%; margin-left: auto; margin-right: auto; margin-top: 6%">
 		<form id="loginInfo">
-			<div id="p" class="easyui-panel" title="请登录"
+			<div id="p" class="easyui-panel" title="请登录" fit="true"
 				style="padding-left: 60px; padding-right: 60px; padding-top: 10px; padding-bottom: 10px"
 				data-options="footer:'#ft',cls:'alpha'">
 				<div style="margin-bottom: 20px">

@@ -17,5 +17,9 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo record);
     
-    UserInfo selectByNamePassword(HashMap<String,String> userInfo);
+    UserInfo selectByNamePassword(HashMap<String,Object> userInfo);
+    
+    List<HashMap<String,Object>> getUserList(HashMap<String,Object> userInfo);
+    
+    long getUserListCount(HashMap<String,Object> userInfo);
 }

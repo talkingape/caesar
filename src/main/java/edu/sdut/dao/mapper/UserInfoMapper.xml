@@ -109,4 +109,54 @@
   	from user_info
   	where name = #{name,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
+  <select id="getUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  	SELECT
+		ui.name userName,
+		ug.name groupName,
+		ua.name actorName,
+		ui.tel
+	FROM
+		user_info ui
+	LEFT JOIN user_group ug ON ui.group_id = ug.id
+	LEFT JOIN user_actor ua ON ui.actor_id = ua.id
+	<where>
+		<if test="userID!=null and userID!=''">
+			ui.id=#{userID}
+		</if>
+		<if test="userName!=null and userName!=-1">
+			ui.name=#{userName}
+		</if>
+		<if test="userGroup!=null and userGroup!=-1">
+			ug.id=#{userGroup}
+		</if>
+		<if test="userActor!=null and userActor!=-1">
+			ua.id=#{userActor}
+		</if>
+	</where>
+	<if test="begin!=null and step!=null">
+		LIMIT #{begin},#{step}
+	</if>
+  </select>
+  <select id="getUserListCount" parameterType="java.util.HashMap" resultType="java.lang.Long">
+  	SELECT
+		count(*)
+	FROM
+		user_info ui
+	LEFT JOIN user_group ug ON ui.group_id = ug.id
+	LEFT JOIN user_actor ua ON ui.actor_id = ua.id
+	<where>
+		<if test="userId!=null and userId!=''">
+			ui.id=#{userId}
+		</if>
+		<if test="userName!=null and userName!=-1">
+			ui.name=#{userName}
+		</if>
+		<if test="userGroup!=null and userGroup!=-1">
+			ug.id=#{userGroup}
+		</if>
+		<if test="userActor!=null and userActor!=-1">
+			ua.id=#{userActor}
+		</if>
+	</where>
+  </select>
 </mapper>

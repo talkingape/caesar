@@ -32,7 +32,7 @@ public class LoginModule {
 		String userName = request.getParameter("userName");
 		String passWord = request.getParameter("passWord");
 		String md5pwd = MD5Util.MD5(passWord);
-		HashMap<String,String> loginInfo =new HashMap<String,String>();
+		HashMap<String, Object> loginInfo =new HashMap<String,Object>();
 		loginInfo.put("name", userName);
 		loginInfo.put("password", md5pwd);
 		UserInfo userInfo = userInfoMapper.selectByNamePassword(loginInfo);
