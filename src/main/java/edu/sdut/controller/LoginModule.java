@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.sdut.dao.UserInfoMapper;
 import edu.sdut.model.UserInfo;
+import edu.sdut.service.UserService;
 import edu.sdut.util.MD5Util;
 
 @Controller
@@ -18,7 +18,7 @@ import edu.sdut.util.MD5Util;
 public class LoginModule {
 	
 	@Resource
-	UserInfoMapper userInfoMapper;
+	UserService userService;
 	
 	@ResponseBody
 	@RequestMapping("/login")
@@ -35,7 +35,7 @@ public class LoginModule {
 		HashMap<String, Object> loginInfo =new HashMap<String,Object>();
 		loginInfo.put("name", userName);
 		loginInfo.put("password", md5pwd);
-		UserInfo userInfo = userInfoMapper.selectByNamePassword(loginInfo);
+		UserInfo userInfo = userService.validateLogin(loginInfo);
 		if (userInfo==null) {
 			return new String("failed");
 		}else {
