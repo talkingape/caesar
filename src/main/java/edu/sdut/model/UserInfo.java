@@ -1,5 +1,7 @@
 package edu.sdut.model;
 
+import java.util.Date;
+
 public class UserInfo {
     private Integer id;
 
@@ -7,11 +9,17 @@ public class UserInfo {
 
     private String password;
 
+    private Integer groupId;
+
     private Integer actorId;
 
     private Integer extActId;
 
     private Integer tel;
+
+    private String email;
+
+    private Date createDatetime;
 
     public Integer getId() {
         return id;
@@ -37,6 +45,14 @@ public class UserInfo {
         this.password = password;
     }
 
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
     public Integer getActorId() {
         return actorId;
     }
@@ -59,5 +75,21 @@ public class UserInfo {
 
     public void setTel(Integer tel) {
         this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getCreateDatetime() {
+        return createDatetime;
+    }
+
+    public void setCreateDatetime(Date createDatetime) {
+        this.createDatetime = createDatetime;
     }
 }

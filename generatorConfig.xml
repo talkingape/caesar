@@ -3,7 +3,7 @@
 <generatorConfiguration>
 	<classPathEntry
 		location="E:\MavenRepository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
-	<context id="context1">
+	<context id="context">
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
@@ -12,7 +12,7 @@
 		<javaModelGenerator targetPackage="edu.sdut.model" targetProject="caesar" />
 		<sqlMapGenerator targetPackage="edu.sdut.dao.mapper" targetProject="caesar" />
 		<javaClientGenerator targetPackage="edu.sdut.dao" targetProject="caesar" type="XMLMAPPER" />
-		<table schema="UserGroup" tableName="user_group" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+		<table schema="UserInfo" tableName="user_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
 		</table>
 	</context>
 </generatorConfiguration>

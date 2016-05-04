@@ -5,12 +5,15 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="actor_id" property="actorId" jdbcType="INTEGER" />
     <result column="ext_act_id" property="extActId" jdbcType="INTEGER" />
     <result column="tel" property="tel" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, password, actor_id, ext_act_id, tel
+    id, name, password, group_id, actor_id, ext_act_id, tel, email, create_datetime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +27,12 @@
   </delete>
   <insert id="insert" parameterType="edu.sdut.model.UserInfo" >
     insert into user_info (id, name, password, 
-      actor_id, ext_act_id, tel
+      group_id, actor_id, ext_act_id, 
+      tel, email, create_datetime
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{actorId,jdbcType=INTEGER}, #{extActId,jdbcType=INTEGER}, #{tel,jdbcType=INTEGER}
+      #{groupId,jdbcType=INTEGER}, #{actorId,jdbcType=INTEGER}, #{extActId,jdbcType=INTEGER}, 
+      #{tel,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="edu.sdut.model.UserInfo" >
@@ -42,6 +47,9 @@
       <if test="password != null" >
         password,
       </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
       <if test="actorId != null" >
         actor_id,
       </if>
@@ -50,6 +58,12 @@
       </if>
       <if test="tel != null" >
         tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -62,6 +76,9 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
       <if test="actorId != null" >
         #{actorId,jdbcType=INTEGER},
       </if>
@@ -70,6 +87,12 @@
       </if>
       <if test="tel != null" >
         #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -82,6 +105,9 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
       <if test="actorId != null" >
         actor_id = #{actorId,jdbcType=INTEGER},
       </if>
@@ -91,6 +117,12 @@
       <if test="tel != null" >
         tel = #{tel,jdbcType=INTEGER},
       </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -98,9 +130,12 @@
     update user_info
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=INTEGER},
       actor_id = #{actorId,jdbcType=INTEGER},
       ext_act_id = #{extActId,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=INTEGER}
+      tel = #{tel,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByNamePassword" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
@@ -112,9 +147,11 @@
   <select id="getUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
   	SELECT
 		ui.name userName,
+		ui.tel,
+		ui.email,
+		ui.create_datetime createDateTime,
 		ug.name groupName,
-		ua.name actorName,
-		ui.tel
+		ua.name actorName
 	FROM
 		user_info ui
 	LEFT JOIN user_group ug ON ui.group_id = ug.id

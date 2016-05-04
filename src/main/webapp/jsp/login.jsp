@@ -7,10 +7,10 @@
 <style type="text/css">
 .alpha {
 	background-color: #F0F0F0;
-	filter: alpha(opacity = 80);
-	-moz-opacity: 0.8;
-	-khtml-opacity: 0.8;
-	opacity: 0.8;
+	filter: alpha(opacity = 90);
+	-moz-opacity: 0.9;
+	-khtml-opacity: 0.9;
+	opacity: 0.9;
 }
 </style>
 </head>
@@ -33,7 +33,7 @@
 					</div>
 					<input class="easyui-textbox" id="userName" name="userName"
 						data-options="prompt:'请输入用户名',validType:'length[3,12]',iconCls:'icon-man'"
-						style="width: 91%; height: 32px">
+						style="width: 100%; height: 32px">
 				</div>
 				<div style="margin-bottom: 20px">
 					<div>
@@ -42,7 +42,7 @@
 					<input class="easyui-textbox" id="passWord" name="passWord"
 						type="password"
 						data-options="prompt:'请输入密码',validType:'length[3,12]',iconCls:'icon-lock'"
-						style="width: 91%; height: 32px">
+						style="width: 100%; height: 32px">
 				</div>
 				<div style="margin-bottom: 20px">
 					<div>
@@ -100,10 +100,11 @@
 									if (data == '"captchafailed"') {
 										changeCAPTCHA();
 										show('验证码输入错误');
+										$("#inputCode").val('');
 									} else if (data == '"failed"') {
 										show('用户名或密码错误');
 									} else if (data == '"success"') {
-										window.location.href = "../userModule/toUserManagement.php";
+										window.location.href = "../userModule/toUserList.php";
 									}
 								}
 							});

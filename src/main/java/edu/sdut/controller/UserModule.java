@@ -21,13 +21,13 @@ public class UserModule {
 	@Resource
 	UserService userService;
 	
-	@RequestMapping("/toUserManagement")
-	public String toUserManagement(HttpServletRequest request){
+	@RequestMapping("/toUserList")
+	public String toUserList(HttpServletRequest request){
 		List<UserActor> allActor = userService.selectAllActor();
 		List<UserGroup> allGroup = userService.selectAllGroup();
 		request.setAttribute("userActor", allActor);
 		request.setAttribute("userGroup", allGroup);
-		return "jsp/userManagement";
+		return "jsp/userList";
 	}
 	
 	@ResponseBody
