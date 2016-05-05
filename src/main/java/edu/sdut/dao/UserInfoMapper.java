@@ -22,4 +22,6 @@ public interface UserInfoMapper {
     List<HashMap<String,Object>> getUserList(HashMap<String,Object> userInfo);
     
     long getUserListCount(HashMap<String,Object> userInfo);
+    
+    int isExistUser(String name);
 }

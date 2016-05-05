@@ -106,6 +106,9 @@ $(function() {
 									field : 'createDateTime',
 									title : '创建日期',
 									width : 60,
+									formatter : function(value, row, index){
+										return formatDatebox(value,"yyyy-MM-dd hh:mm:ss")
+									}
 								},{
 									field : 'action',
 									title : '操作',
@@ -142,42 +145,113 @@ function submit(){
 var openTimes=0;
 var smallPanel;
 function addUser() {
-	if(openTimes==0){
-		smallPanel=$.messager.show({
+	smallPanel=$.messager.show({
                 id : "addUser",
                 title : '新增用户',
-                msg : '<div id="addPanel" style="align: center; width: 99%; margin-left: auto; margin-right: auto;margin-top: 1%">'
-                		+'<form><table style="width: 99%; margin-left: auto; margin-right: auto;margin-top: 1%"><tbody>'
-                		+'<tr><td style="height:12px">用户名&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="width: 64%">'
-                		+'<input class="easyui-textbox" id="userName" name="userName" style="width: 100%; height: 24px"></td></tr>'
-                		+'<tr><td>用户邮箱&nbsp;</td><td><input class="easyui-textbox"id="userEmail" name="userEmail" '
-                		+'style="width: 100%; height: 24px"></td></tr><tr><td>用户组别&nbsp;</td><td><select id="userGroup"'
-    					+'name="userGroup" class="js-example-basic-single" style="width: 100%"><option value="-1">请选择</option>'
-    					+'<c:forEach items="${userGroup }" var="item"><option value="${item.id }">${item.name }</option>'
-    					+'</c:forEach></select></td></tr><tr><td>用户角色&nbsp;</td><td><select id="userGroup" name="userGroup"'
-    					+'class="js-example-basic-single" style="width: 100%"><option value="-1">请选择</option>'
-    					+'<c:forEach items="${userGroup }" var="item"><option value="${item.id }">${item.name }</option>'
-    					+'</c:forEach></select></td></tr><tr><td colspan="2" align="center"><a class="easyui-linkbutton"'
-    					+'style="width: 80px;margin-top: 7px"href="javascript:void(0)" onclick="confirmUser()">确认添加</a>'
-    					+'</td></tr></tbody></table></form></div>',
+                msg : '<div style="margin-top:12px"><form id="newUserInfo">'
+        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户名：</div>'
+        			+'<input class="easyui-textbox" id="newUserName" name="userName" style="width: 72%; height: 64%"></div>'
+        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">邮箱：</div>'
+        			+'<input class="easyui-textbox" id="newUserEmail" name="userEmail" style="width: 72%; height: 64%"></div>'
+        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户组别：</div>'
+        			+'<select id="newUserGroup" name="userGroup" class="js-example-basic-single" style="width: 72%; height: 64%">'
+        			+'<option value="-1">请选择</option>'
+        			+'<c:forEach items="${userGroup }" var="item">'
+        			+'<option value="${item.id }">${item.name }</option>'
+        			+'</c:forEach>'
+        			+'</select></div>'
+        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户角色：</div>'
+        			+'<select id="newUserActor" name="userActor" class="js-example-basic-single" style="width: 72%; height: 64%">'
+        			+'<option value="-1">请选择</option>'
+        			+'<c:forEach items="${userActor }" var="item">'
+        			+'<option value="${item.id }">${item.name }</option>'
+        			+'</c:forEach>'
+        			+'</select></div>'
+        			+'<div style="height: 48px;text-align: center;margin-top:12px"><a class="easyui-linkbutton" style="width:96px;height:32px"'
+					+'href="javascript:void(0)" onclick="confirmUser()">新增用户</a></div>'
+        			+'</form></div>',
                 closable : true,
                 modal : true,
                 draggable : true,
                 timeout : 0,
                 inline : false,
-                width : 320,
-                height : 220,
+                width : 360,
+                height : 340,
                 left : 200,
                 top : 20,
                 style : {
                     left : 700,
                     top : 200,
                 },
+                onBeforeOpen : function(){
+                	$("#newUserGroup").select2();
+                	$("#newUserActor").select2();
+                },
+                onClose : function(){
+                	window.location.reload();
+                }
             });
-	}
-	else{
-		smallPanel.window('open');
-	}
-	openTimes++;
 };
+function confirmUser(){
+	$.ajax({
+        type: "POST",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        url: "addUser.php?"+$("#newUserInfo").serialize(),
+        success: function(data){
+        	if(data=="success"){
+        		$.messager.show({
+    				title : '提示',
+    				msg : '添加成功！'
+    			});
+        	}else if(data=="exist"){
+        		$.messager.show({
+    				title : '提示',
+    				msg : '用户名已存在！'
+    			});
+        	}else if(data=="failed"){
+        		$.messager.show({
+    				title : '提示',
+    				msg : '添加失败！'
+    			});
+        	}else{
+        		$.messager.show({
+    				title : '提示',
+    				msg : '未知错误！'
+    			});
+        	}
+		location.reload();
+        }
+    });
+}
+Date.prototype.format = function (format) {  
+    var o = {  
+        "M+": this.getMonth() + 1, // month  
+        "d+": this.getDate(), // day  
+        "h+": this.getHours(), // hour  
+        "m+": this.getMinutes(), // minute  
+        "s+": this.getSeconds(), // second  
+        "q+": Math.floor((this.getMonth() + 3) / 3), // quarter  
+        "S": this.getMilliseconds()  
+        // millisecond  
+    }  
+    if (/(y+)/.test(format))  
+        format = format.replace(RegExp.$1, (this.getFullYear() + "")  
+            .substr(4 - RegExp.$1.length));  
+    for (var k in o)  
+        if (new RegExp("(" + k + ")").test(format))  
+            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));  
+    return format;  
+}
+function formatDatebox(value,parser) {  
+    /* if (value == null || value == '') {  
+        return '1970-01-01 08:00:00';  
+    }  */ 
+    var dt;  
+    if (value instanceof Date) {  
+        dt = value;  
+    } else {  
+        dt = new Date(value);  
+    }  
+    return dt.format(parser);
+}
 </script>

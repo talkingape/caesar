@@ -13,6 +13,7 @@ import edu.sdut.dao.*;
 import edu.sdut.model.UserActor;
 import edu.sdut.model.UserGroup;
 import edu.sdut.model.UserInfo;
+import edu.sdut.model.UserLoginLog;
 import edu.sdut.service.UserService;
 import edu.sdut.util.EasyuiDataGridJson;
 
@@ -27,6 +28,8 @@ public class UserServiceImpl implements UserService{
 	UserAuthorityMapper userAuthorityMapper;
 	@Resource
 	UserGroupMapper userGroupMapper;
+	@Resource
+	UserLoginLogMapper userLoginLogMapper;
 	
 	@Override
 	public UserInfo validateLogin(HashMap<String,Object> loginInfo) {
@@ -84,5 +87,27 @@ public class UserServiceImpl implements UserService{
 	public List<UserGroup> selectAllGroup() {
 		List<UserGroup> allGroup = userGroupMapper.selectAllGroup();
 		return allGroup;
+	}
+
+	@Override
+	public Boolean isExistUser(String name) {
+		int id = userInfoMapper.isExistUser(name);
+		if (id>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public int addUser(UserInfo userInfo) {
+		int insertSelective = userInfoMapper.insertSelective(userInfo);
+		return insertSelective;
+	}
+
+	@Override
+	public int insertLoginLog(UserLoginLog log) {
+		int sign = userLoginLogMapper.insert(log);
+		return sign;
 	}
 }

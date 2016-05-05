@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import edu.sdut.model.UserActor;
 import edu.sdut.model.UserGroup;
 import edu.sdut.model.UserInfo;
+import edu.sdut.model.UserLoginLog;
 import edu.sdut.util.EasyuiDataGridJson;
 
 public interface UserService {
@@ -20,4 +21,10 @@ public interface UserService {
 	public HashMap<String,Object> getParamFromReq(HttpServletRequest request);
 	
 	public EasyuiDataGridJson getUserList(HashMap<String, Object> param);
+	
+	public Boolean isExistUser(String name);
+	
+	public int addUser(UserInfo userInfo);
+	
+	public int insertLoginLog(UserLoginLog log);
 }

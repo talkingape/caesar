@@ -7,45 +7,34 @@
 </head>
 <html>
 <body>
-	<div>
-		<form style="text-align: center;">
-			<table style="">
-				<tbody>
-					<tr>
-						<td>用户名：</td>
-						<td><input class="easyui-textbox" id="userName"
-							name="userName"
-							style="width: 91%; height: 24px"></td>
-					</tr>
-					<tr>
-						<td>用户组别：</td>
-						<td><select id="userGroup" name="userGroup"
-							class="js-example-basic-single" style="width: 100%">
-								<option value="-1">请选择</option>
-								<c:forEach items="${userGroup }" var="item">
-									<option value="${item.id }">${item.name }</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td>用户角色：</td>
-						<td><select id="userGroup" name="userGroup"
-							class="js-example-basic-single" style="width: 100%">
-								<option value="-1">请选择</option>
-								<c:forEach items="${userGroup }" var="item">
-									<option value="${item.id }">${item.name }</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td>用户邮箱：</td>
-						<td><input class="easyui-textbox" id="userEmail"
-							name="userEmail"
-							style="width: 91%; height: 24px"></td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
+<div>
+	<form>
+		<div style="height: 48px"><div style="width: 24%;float: left;font-family: 幼圆;font-size: 24px">用户名：</div>
+			<input class="easyui-textbox" id="newUserName" name="userName"
+						style="width: 76%; height: 64%"></div>
+		<div style="height: 48px"><div style="width: 24%;float: left;">用户名：</div>
+			<input class="easyui-textbox" id="newUserEmail" name="userEmail"
+						style="width: 76%; height: 64%"></div>
+		<div style="height: 48px"><div style="width: 24%;float: left;">用户名：</div>
+			<select id="newUserGroup" name="userGroup" class="js-example-basic-single" style="width: 76%; height: 64%">
+				<option value="-1">请选择</option>
+					<c:forEach items="${userGroup }" var="item">
+						<option value="${item.id }">${item.name }</option>
+					</c:forEach>
+				</select></div>
+		<div style="height: 48px"><div style="width: 24%;float: left;">用户名：</div>
+			<select id="newUserActor" name="userActor" class="js-example-basic-single" style="width: 76%; height: 64%">
+				<option value="-1">请选择</option>
+					<c:forEach items="${userActor }" var="item">
+						<option value="${item.id }">${item.name }</option>
+					</c:forEach>
+				</select></div>
+		<div style="height: 48px;text-align: center"><a class="easyui-linkbutton" style="width: 80px; margin-top: 124px"
+					href="javascript:void(0)" onclick="addUser()">新增用户</a></div>
+	</form>
+</div>
 </body>
+<script type="text/javascript" charset="">
+	$("#userGroup").select2();
+</script>
 </html>
