@@ -10,3 +10,4 @@
 <script type="text/javascript" src="${path}/js/select2-4.0.2/dist/js/select2.js"></script>
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${path}/js/common.js"></script>

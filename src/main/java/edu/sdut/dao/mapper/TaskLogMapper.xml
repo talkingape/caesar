@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.sdut.dao.TaskLogMapper" >
+  <resultMap id="BaseResultMap" type="edu.sdut.model.TaskLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="INTEGER" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="pre_status" property="preStatus" jdbcType="INTEGER" />
+    <result column="after_status" property="afterStatus" jdbcType="INTEGER" />
+    <result column="pre_completion" property="preCompletion" jdbcType="INTEGER" />
+    <result column="after_completion" property="afterCompletion" jdbcType="INTEGER" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, task_id, operator, operate_time, pre_status, after_status, pre_completion, after_completion, 
+    describe, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="edu.sdut.model.TaskLog" >
+    insert into task_log (id, task_id, operator, 
+      operate_time, pre_status, after_status, 
+      pre_completion, after_completion, describe, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{operator,jdbcType=INTEGER}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{preStatus,jdbcType=INTEGER}, #{afterStatus,jdbcType=INTEGER}, 
+      #{preCompletion,jdbcType=INTEGER}, #{afterCompletion,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.sdut.model.TaskLog" >
+    insert into task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="preStatus != null" >
+        pre_status,
+      </if>
+      <if test="afterStatus != null" >
+        after_status,
+      </if>
+      <if test="preCompletion != null" >
+        pre_completion,
+      </if>
+      <if test="afterCompletion != null" >
+        after_completion,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preStatus != null" >
+        #{preStatus,jdbcType=INTEGER},
+      </if>
+      <if test="afterStatus != null" >
+        #{afterStatus,jdbcType=INTEGER},
+      </if>
+      <if test="preCompletion != null" >
+        #{preCompletion,jdbcType=INTEGER},
+      </if>
+      <if test="afterCompletion != null" >
+        #{afterCompletion,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.sdut.model.TaskLog" >
+    update task_log
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preStatus != null" >
+        pre_status = #{preStatus,jdbcType=INTEGER},
+      </if>
+      <if test="afterStatus != null" >
+        after_status = #{afterStatus,jdbcType=INTEGER},
+      </if>
+      <if test="preCompletion != null" >
+        pre_completion = #{preCompletion,jdbcType=INTEGER},
+      </if>
+      <if test="afterCompletion != null" >
+        after_completion = #{afterCompletion,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.sdut.model.TaskLog" >
+    update task_log
+    set task_id = #{taskId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=INTEGER},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      pre_status = #{preStatus,jdbcType=INTEGER},
+      after_status = #{afterStatus,jdbcType=INTEGER},
+      pre_completion = #{preCompletion,jdbcType=INTEGER},
+      after_completion = #{afterCompletion,jdbcType=INTEGER},
+      describe = #{describe,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

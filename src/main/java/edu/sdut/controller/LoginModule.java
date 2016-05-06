@@ -52,8 +52,8 @@ public class LoginModule {
 
 	@RequestMapping("/toLogin")
 	public String toLogin(HttpServletRequest request) {
-		request.getSession().setAttribute("userInfo", null);
-		return "jsp/login";
+		request.getSession().setAttribute("user", null);
+		return "login";
 	}
 
 }

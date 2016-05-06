@@ -29,7 +29,7 @@ public class UserModule {
 		List<UserGroup> allGroup = userService.selectAllGroup();
 		request.setAttribute("userActor", allActor);
 		request.setAttribute("userGroup", allGroup);
-		return "jsp/userList";
+		return "userList";
 	}
 
 	@ResponseBody
@@ -55,13 +55,14 @@ public class UserModule {
 		userInfo.setActorId(Integer.parseInt(userActor));
 		userInfo.setCreateDatetime(new Date());
 		if (userService.isExistUser(userInfo.getName())) {
-			return "exist";
+			return new String("exist");
 		}
 		int sign = userService.addUser(userInfo);
 		if (sign==1) {
-			return "success";
+			return new String("success");
 		}else{
-			return "failed";
+			return new String("failed");
 		}
 	}
+	
 }

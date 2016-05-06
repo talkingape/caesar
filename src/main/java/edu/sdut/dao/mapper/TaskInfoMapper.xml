@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.sdut.dao.TaskInfoMapper" >
+  <resultMap id="BaseResultMap" type="edu.sdut.model.TaskInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="pre_user_id" property="preUserId" jdbcType="INTEGER" />
+    <result column="current_user_id" property="currentUserId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="expext_time" property="expextTime" jdbcType="TIMESTAMP" />
+    <result column="task_time" property="taskTime" jdbcType="INTEGER" />
+    <result column="completion" property="completion" jdbcType="INTEGER" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, title, project_id, category, create_user_id, pre_user_id, current_user_id, 
+    status, priority, create_time, expext_time, task_time, completion, describe, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="edu.sdut.model.TaskInfo" >
+    insert into task_info (id, code, title, 
+      project_id, category, create_user_id, 
+      pre_user_id, current_user_id, status, 
+      priority, create_time, expext_time, 
+      task_time, completion, describe, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, 
+      #{preUserId,jdbcType=INTEGER}, #{currentUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{expextTime,jdbcType=TIMESTAMP}, 
+      #{taskTime,jdbcType=INTEGER}, #{completion,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.sdut.model.TaskInfo" >
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="preUserId != null" >
+        pre_user_id,
+      </if>
+      <if test="currentUserId != null" >
+        current_user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="expextTime != null" >
+        expext_time,
+      </if>
+      <if test="taskTime != null" >
+        task_time,
+      </if>
+      <if test="completion != null" >
+        completion,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="preUserId != null" >
+        #{preUserId,jdbcType=INTEGER},
+      </if>
+      <if test="currentUserId != null" >
+        #{currentUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expextTime != null" >
+        #{expextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskTime != null" >
+        #{taskTime,jdbcType=INTEGER},
+      </if>
+      <if test="completion != null" >
+        #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.sdut.model.TaskInfo" >
+    update task_info
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="preUserId != null" >
+        pre_user_id = #{preUserId,jdbcType=INTEGER},
+      </if>
+      <if test="currentUserId != null" >
+        current_user_id = #{currentUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expextTime != null" >
+        expext_time = #{expextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskTime != null" >
+        task_time = #{taskTime,jdbcType=INTEGER},
+      </if>
+      <if test="completion != null" >
+        completion = #{completion,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.sdut.model.TaskInfo" >
+    update task_info
+    set code = #{code,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      category = #{category,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      pre_user_id = #{preUserId,jdbcType=INTEGER},
+      current_user_id = #{currentUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      expext_time = #{expextTime,jdbcType=TIMESTAMP},
+      task_time = #{taskTime,jdbcType=INTEGER},
+      completion = #{completion,jdbcType=INTEGER},
+      describe = #{describe,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -145,6 +145,10 @@ function submit(){
 var openTimes=0;
 var smallPanel;
 function addUser() {
+	//获取浏览器显示区域的高度   
+	var h=$(window).height();   
+	//获取浏览器显示区域的宽度   
+	var w=$(window).width();  
 	smallPanel=$.messager.show({
                 id : "addUser",
                 title : '新增用户',
@@ -177,11 +181,9 @@ function addUser() {
                 inline : false,
                 width : 360,
                 height : 340,
-                left : 200,
-                top : 20,
                 style : {
-                    left : 700,
-                    top : 200,
+                    left : w/2-180,
+                    top : h/2
                 },
                 onBeforeOpen : function(){
                 	$("#newUserGroup").select2();
@@ -198,60 +200,16 @@ function confirmUser(){
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         url: "addUser.php?"+$("#newUserInfo").serialize(),
         success: function(data){
-        	if(data=="success"){
-        		$.messager.show({
-    				title : '提示',
-    				msg : '添加成功！'
-    			});
-        	}else if(data=="exist"){
-        		$.messager.show({
-    				title : '提示',
-    				msg : '用户名已存在！'
-    			});
-        	}else if(data=="failed"){
-        		$.messager.show({
-    				title : '提示',
-    				msg : '添加失败！'
-    			});
+        	if(data=='success'){
+        		refreshAfterCloseShow("添加成功",800);
+        	}else if(data=='exist'){
+        		refreshAfterCloseShow("用户名已存在",800);
+        	}else if(data=='failed'){
+        		refreshAfterCloseShow("添加失败",800);
         	}else{
-        		$.messager.show({
-    				title : '提示',
-    				msg : '未知错误！'
-    			});
+        		refreshAfterCloseShow("未知错误",800);
         	}
-		location.reload();
         }
     });
-}
-Date.prototype.format = function (format) {  
-    var o = {  
-        "M+": this.getMonth() + 1, // month  
-        "d+": this.getDate(), // day  
-        "h+": this.getHours(), // hour  
-        "m+": this.getMinutes(), // minute  
-        "s+": this.getSeconds(), // second  
-        "q+": Math.floor((this.getMonth() + 3) / 3), // quarter  
-        "S": this.getMilliseconds()  
-        // millisecond  
-    }  
-    if (/(y+)/.test(format))  
-        format = format.replace(RegExp.$1, (this.getFullYear() + "")  
-            .substr(4 - RegExp.$1.length));  
-    for (var k in o)  
-        if (new RegExp("(" + k + ")").test(format))  
-            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));  
-    return format;  
-}
-function formatDatebox(value,parser) {  
-    /* if (value == null || value == '') {  
-        return '1970-01-01 08:00:00';  
-    }  */ 
-    var dt;  
-    if (value instanceof Date) {  
-        dt = value;  
-    } else {  
-        dt = new Date(value);  
-    }  
-    return dt.format(parser);
 }
 </script>

@@ -71,65 +71,52 @@
 </body>
 </html>
 <script type="text/javascript" charset="UTF-8">
-	var level = 0;
-	function changeCAPTCHA() {
-		level++;
-		var prop = new Array();
-		prop[0] = 'n';
-		prop[1] = 'l';
-		prop[2] = 'nl';
-		prop[3] = 'ch';
-		prop[4] = 'ch';
-		$("#validateCodeImg").attr(
-				"src",
-				"${path}/captcha/draw.php?createTypeFlag=" + prop[level % 4]
-						+ "&id=" + parseInt(1000 * Math.random()));
-	}
-	function login() {
-		if ($("#userName").val() != '') {
-			if ($("#passWord").val() != '') {
-				if ($("#inputCode").val() != '') {
-					$
-							.ajax({
-								url : '${path}/loginModule/login.php',
-								type : 'POST',
-								async : false,
-								data : $("#loginInfo").serialize(),
-								dataType : 'text',
-								success : function(data) {
-									if (data == '"captchafailed"') {
-										changeCAPTCHA();
-										show('验证码输入错误');
-										$("#inputCode").val('');
-									} else if (data == '"failed"') {
-										show('用户名或密码错误');
-									} else if (data == '"success"') {
-										window.location.href = "../userModule/toUserList.php";
-									}
+var level = 0;
+function changeCAPTCHA() {
+	level++;
+	var prop = new Array();
+	prop[0] = 'n';
+	prop[1] = 'l';
+	prop[2] = 'nl';
+	prop[3] = 'ch';
+	prop[4] = 'ch';
+	$("#validateCodeImg").attr(
+			"src",
+			"${path}/captcha/draw.php?createTypeFlag=" + prop[level % 4]
+					+ "&id=" + parseInt(1000 * Math.random()));
+}
+function login() {
+	if ($("#userName").val() != '') {
+		if ($("#passWord").val() != '') {
+			if ($("#inputCode").val() != '') {
+				$
+						.ajax({
+							url : '${path}/loginModule/login.php',
+							type : 'POST',
+							async : false,
+							data : $("#loginInfo").serialize(),
+							dataType : 'text',
+							success : function(data) {
+								if (data == 'captchafailed') {
+									changeCAPTCHA();
+									show('验证码输入错误');
+									$("#inputCode").val('');
+								} else if (data == 'failed') {
+									show('用户名或密码错误');
+								} else if (data == 'success') {
+									window.location.href = "../userModule/toUserList.php";
 								}
-							});
-				} else {
-					show('请填写验证码');
-				}
+							}
+						});
 			} else {
-				show('请填写密码');
+				show('请填写验证码',500);
 			}
 		} else {
-			show('请填写用户名');
+			show('请填写密码',500);
 		}
+	} else {
+		show('请填写用户名',500);
 	}
-	function show(text) {
-		$.messager.show({
-			title : '提示',
-			msg : text,
-			timeout : 800,
-			width : 320,
-			height : 160,
-			showType : 'show',
-			style : {
-				right : '',
-				bottom : ''
-			}
-		});
-	}
+}
+
 </script>
