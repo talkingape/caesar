@@ -17,9 +17,9 @@
 <html>
 <body background="${path}/pic/loginBackground.jpg">
 	<div align="center" style="padding-top: 120px">
-		<font size="20" color="#FFFFFF"
-			style="font-weight: bold; font-family: '幼圆'">凯&nbsp;&nbsp;撒
-			&nbsp;项 &nbsp;目 &nbsp;管 &nbsp;理 &nbsp;系&nbsp;&nbsp;统</font>
+		<font size="20" color="#FFFFFF" style="font-weight: bold; font-family: '幼圆'">
+		凯&nbsp;&nbsp;撒&nbsp;&nbsp;项&nbsp;&nbsp;目&nbsp;&nbsp;管&nbsp;&nbsp;理&nbsp;&nbsp;系&nbsp;&nbsp;统
+		</font>
 	</div>
 	<div
 		style="height: auto; width: 32%; margin-left: auto; margin-right: auto; margin-top: 6%">
@@ -69,6 +69,9 @@
 		</form>
 	</div>
 </body>
+<footer>
+	<div class="alpha" style="width: 100%;background-color: #36648B;margin-top: 6%;" align="center">Powered by WangGang &copy; All Rights Reserved</div>
+</footer>
 </html>
 <script type="text/javascript" charset="UTF-8">
 var level = 0;

@@ -11,3 +11,13 @@
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${path}/js/easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${path}/js/common.js"></script>
+<style>
+body{
+	font-family: 幼圆;
+	margin: 0px;
+}
+footer{
+	font-family: Courier;
+	margin-top: 2%;
+}
+</style>

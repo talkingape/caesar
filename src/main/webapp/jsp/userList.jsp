@@ -7,7 +7,8 @@
 </head>
 <html>
 <body>
-	<div style="width: 81%; margin-left: auto; margin-right: auto;">
+<%@include file="/jsp/topBar.jsp"%>
+	<div style="width: 81%; margin-left: auto; margin-right: auto;margin-top: 1%">
 		<fieldset style="border: 1px blue dashed">
 			<legend>查询条件</legend>
 			<div style="float: left;">
@@ -62,6 +63,9 @@
 		<table id="dataGrid"></table>
 	</div>
 </body>
+<footer>
+<%@include file="/jsp/footer.jsp"%>
+</footer>
 </html>
 <script type="text/javascript" charset="UTF-8">
 $(function() {
@@ -116,6 +120,7 @@ $(function() {
 									formatter : function(value, row, index){
 										var str="";
 										str+="<a href='javascript:void(0)'>编辑</a>";
+										str+="&nbsp;&nbsp;<a href='javascript:void(0)'>详情</a>";
 										return str;
 									}
 								}] ],

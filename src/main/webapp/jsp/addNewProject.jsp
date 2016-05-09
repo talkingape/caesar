@@ -7,7 +7,8 @@
 </head>
 <html>
 <body>
-<div style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 6%">
+<%@include file="/jsp/topBar.jsp"%>
+<div style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 1%">
 	<fieldset>
 		<legend>新建项目</legend>
 		<form>
@@ -38,6 +39,12 @@
 	</fieldset>
 </div>
 </body>
+<footer>
+<%@include file="/jsp/footer.jsp"%>
+</footer>
 <script type="text/javascript" charset="UTF-8">
+$(function(){
+	$("#userGroup").select2();
+});
 </script>
 </html>

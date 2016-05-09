@@ -3,10 +3,11 @@
 <%@include file="/jsp/header.jsp"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<title>添加新项目</title>
+<title>项目内容</title>
 </head>
 <html>
 <body>
+<%@include file="/jsp/topBar.jsp"%>
 <div style="margin-top: 6%">
 	<div style="float: left;margin-left: 6%;border: 1px gray solid;width: 30%;height:32%;background-color: #EBEBEB;">
 		<div>任务追踪</div>

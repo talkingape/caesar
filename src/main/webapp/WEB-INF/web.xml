@@ -33,7 +33,7 @@
 	<!-- 登录状态控制器 -->
 	<!-- <filter>
 		<filter-name>loginFilter</filter-name>
-		<filter-class>edu.sdut.util.loginFilter</filter-class>
+		<filter-class>edu.sdut.util.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>

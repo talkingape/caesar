@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.sdut.model.UserInfo;
 
-public class loginFilter extends HttpServlet implements Filter {
+public class LoginFilter extends HttpServlet implements Filter {
 
 	/**
 	 * 
@@ -33,6 +33,9 @@ public class loginFilter extends HttpServlet implements Filter {
 				||servletPath.endsWith("png")||servletPath.endsWith(".gif")
 				||servletPath.endsWith(".css")||servletPath.endsWith("loginModule/toLogin.php")
 				||servletPath.endsWith("loginModule/login.php")) {
+			if (req.getAttribute("userName")!=null&&userInfo!=null) {
+				req.setAttribute("userName", userInfo.getName());
+			}
 			chain.doFilter(req, resp);
 		}else {
 			/*RequestDispatcher dispatcher = req.getRequestDispatcher("/loginModule/toLogin.php");
