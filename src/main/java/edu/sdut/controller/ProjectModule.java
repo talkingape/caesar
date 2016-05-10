@@ -1,5 +1,6 @@
 package edu.sdut.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -59,8 +60,9 @@ public class ProjectModule {
 	
 	@ResponseBody
 	@RequestMapping("/getProjectList")
-	public EasyuiDataGridJson getProjectList(){
-		
-		return null;
+	public EasyuiDataGridJson getProjectList(HttpServletRequest request){
+		HashMap<String, Object> param = projectService.getParamFromReq(request);
+		EasyuiDataGridJson projectList = projectService.getProjectList(param);
+		return projectList;
 	}
 }

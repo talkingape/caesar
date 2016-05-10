@@ -51,7 +51,7 @@
 							<tr style="height: 36px">
 								<td>创建时间</td>
 								<td><input class="easyui-datebox"
-									id="createTime" name="createTimeBegin" style="width: 32%; height: 32px;">至<input class="easyui-datetimebox"
+									id="createTime" name="createTimeBegin" style="width: 32%; height: 32px;">至<input class="easyui-datebox"
 									id="createTime" name="createTimeEnd" style="width: 32%; height: 32px;"></td>
 							</tr>
 						</tbody>
@@ -151,75 +151,5 @@ $(function() {
 })(jQuery);
 function submit(){
 	$("#dataGrid").datagrid({url:'getProjectList.php',queryParams:$('#queryForm').serializeObject()});
-}
-var openTimes=0;
-var smallPanel;
-function addUser() {
-	//获取浏览器显示区域的高度   
-	var h=$(window).height();   
-	//获取浏览器显示区域的宽度   
-	var w=$(window).width();  
-	smallPanel=$.messager.show({
-                id : "addUser",
-                title : '新增用户',
-                msg : '<div style="margin-top:12px"><form id="newUserInfo">'
-        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户名：</div>'
-        			+'<input class="easyui-textbox" id="newUserName" name="userName" style="width: 72%; height: 64%"></div>'
-        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">邮箱：</div>'
-        			+'<input class="easyui-textbox" id="newUserEmail" name="userEmail" style="width: 72%; height: 64%"></div>'
-        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户组别：</div>'
-        			+'<select id="newUserGroup" name="userGroup" class="js-example-basic-single" style="width: 72%; height: 64%">'
-        			+'<option value="-1">请选择</option>'
-        			+'<c:forEach items="${userGroup }" var="item">'
-        			+'<option value="${item.id }">${item.name }</option>'
-        			+'</c:forEach>'
-        			+'</select></div>'
-        			+'<div style="height: 48px"><div style="width: 28%;margin-top:5px;float: left;font-family: 幼圆;font-size: 16px">用户角色：</div>'
-        			+'<select id="newUserActor" name="userActor" class="js-example-basic-single" style="width: 72%; height: 64%">'
-        			+'<option value="-1">请选择</option>'
-        			+'<c:forEach items="${userActor }" var="item">'
-        			+'<option value="${item.id }">${item.name }</option>'
-        			+'</c:forEach>'
-        			+'</select></div>'
-        			+'<div style="height: 48px;text-align: center;margin-top:12px"><a class="easyui-linkbutton" style="width:96px;height:32px"'
-					+'href="javascript:void(0)" onclick="confirmUser()">新增用户</a></div>'
-        			+'</form></div>',
-                closable : true,
-                modal : true,
-                draggable : true,
-                timeout : 0,
-                inline : false,
-                width : 360,
-                height : 340,
-                style : {
-                    left : w/2-180,
-                    top : h/2
-                },
-                onBeforeOpen : function(){
-                	$("#newUserGroup").select2();
-                	$("#newUserActor").select2();
-                },
-                onClose : function(){
-                	window.location.reload();
-                }
-            });
-};
-function confirmUser(){
-	$.ajax({
-        type: "POST",
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        url: "addUser.php?"+$("#newUserInfo").serialize(),
-        success: function(data){
-        	if(data=='success'){
-        		refreshAfterCloseShow("添加成功",800);
-        	}else if(data=='exist'){
-        		refreshAfterCloseShow("用户名已存在",800);
-        	}else if(data=='failed'){
-        		refreshAfterCloseShow("添加失败",800);
-        	}else{
-        		refreshAfterCloseShow("未知错误",800);
-        	}
-        }
-    });
 }
 </script>

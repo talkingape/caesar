@@ -1,15 +1,20 @@
 package edu.sdut.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import edu.sdut.dao.*;
 import edu.sdut.model.*;
 import edu.sdut.service.ProjectService;
 import edu.sdut.util.CommonUtil;
+import edu.sdut.util.EasyuiDataGridJson;
 
 @Service("ProjectService")
 public class ProjectServiceImpl implements ProjectService{
@@ -50,6 +55,54 @@ public class ProjectServiceImpl implements ProjectService{
 		}else {
 			return true;
 		}
+	}
+
+	@Override
+	public HashMap<String, Object> getParamFromReq(HttpServletRequest request) {
+		String projectName = request.getParameter("projectName");
+		String userName = request.getParameter("userName");
+		String userGroup = request.getParameter("userGroup");
+		String projectStatus = request.getParameter("projectStatus");
+		String createTimeBegin = request.getParameter("createTimeBegin");
+		String createTimeEnd = request.getParameter("createTimeEnd");
+		String pageStr = request.getParameter("page");
+		String rowsStr = request.getParameter("rows");
+		HashMap<String,Object> param =new HashMap<String,Object>();
+		if (!StringUtils.isEmpty(projectName)) {
+			param.put("projectName", projectName);
+		}
+		if (!StringUtils.isEmpty(userName)) {
+			param.put("userName", userName);
+		}
+		if (!StringUtils.isEmpty(userGroup)) {
+			param.put("userGroup", userGroup);
+		}
+		if (!StringUtils.isEmpty(projectStatus)) {
+			param.put("projectStatus", projectStatus);
+		}
+		if (!StringUtils.isEmpty(createTimeBegin)) {
+			param.put("createTimeBegin", createTimeBegin);
+		}
+		if (!StringUtils.isEmpty(createTimeEnd)) {
+			param.put("createTimeEnd", createTimeEnd);
+		}
+		if (!StringUtils.isEmpty(pageStr)&&!StringUtils.isEmpty(rowsStr)) {
+			int page = Integer.parseInt(pageStr);
+			int rows = Integer.parseInt(rowsStr);
+			param.put("begin", rows*(page-1));
+			param.put("step", rows);
+		}
+		return param;
+	}
+	
+	@Override
+	public EasyuiDataGridJson getProjectList(HashMap<String, Object> param) {
+		List<HashMap<String, Object>> projectList = projectInfoMapper.getProjectList(param);
+		EasyuiDataGridJson eJson=new EasyuiDataGridJson();
+		eJson.setRows(projectList);
+		Long total = projectInfoMapper.getProjectListCount(param);
+		eJson.setTotal(total);
+		return eJson;
 	}
 
 }

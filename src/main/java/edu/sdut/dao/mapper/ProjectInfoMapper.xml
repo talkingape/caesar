@@ -141,4 +141,67 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getProjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  	SELECT
+		pi.id,
+		pi. CODE,
+		pi.title,
+		ui. NAME userName,
+		ug. NAME userGroup,
+		pi. STATUS,
+		pi.create_time createDateTime
+	FROM
+		project_info pi
+	LEFT JOIN user_info ui ON pi.create_user_id = ui.id
+	LEFT JOIN user_group ug ON pi.group_id = ug.id
+	<where>
+		<if test="projectName != null and projectName != ''">
+			pi.title=#{projectName}
+		</if>
+		<if test="userName != null and userName != ''">
+			ui.name=#{userName}
+		</if>
+		<if test="userGroup != null and userGroup != ''">
+			ug.name=#{userGroup}
+		</if>
+		<if test="projectStatus != null and projectStatus != ''">
+			pi.status=#{projectStatus}
+		</if>
+		<if test="createTimeBegin != null and createTimeBegin != ''">
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				pi.create_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+	</where>
+	<if test="begin!=null and step!=null">
+		LIMIT #{begin},#{step}
+	</if>
+  </select>
+  <select id="getProjectListCount" parameterType="java.util.HashMap" resultType="java.lang.Long">
+  	SELECT
+		count(*)
+	FROM
+		project_info pi
+	LEFT JOIN user_info ui ON pi.create_user_id = ui.id
+	LEFT JOIN user_group ug ON pi.group_id = ug.id
+	<where>
+		<if test="projectName != null and projectName != ''">
+			pi.title=#{projectName}
+		</if>
+		<if test="userName != null and userName != ''">
+			ui.name=#{userName}
+		</if>
+		<if test="userGroup != null and userGroup != ''">
+			ug.name=#{userGroup}
+		</if>
+		<if test="projectStatus != null and projectStatus != ''">
+			pi.status=#{projectStatus}
+		</if>
+		<if test="createTimeBegin != null and createTimeBegin != ''">
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				pi.create_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+	</where>
+  </select>
 </mapper>
