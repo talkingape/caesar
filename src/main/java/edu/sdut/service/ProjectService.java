@@ -1,6 +1,7 @@
 package edu.sdut.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,4 +17,6 @@ public interface ProjectService {
 	public HashMap<String,Object> getParamFromReq(HttpServletRequest request);
 	
 	public EasyuiDataGridJson getProjectList(HashMap<String, Object> param);
+	
+	public List<HashMap<String, Object>> getProjectByGroup(int groupID);
 }

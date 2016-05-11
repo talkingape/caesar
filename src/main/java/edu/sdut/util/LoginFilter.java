@@ -33,9 +33,6 @@ public class LoginFilter extends HttpServlet implements Filter {
 				||servletPath.endsWith("png")||servletPath.endsWith(".gif")
 				||servletPath.endsWith(".css")||servletPath.endsWith("loginModule/toLogin.php")
 				||servletPath.endsWith("loginModule/login.php")) {
-			if (req.getAttribute("userName")!=null&&userInfo!=null) {
-				req.setAttribute("userName", userInfo.getName());
-			}
 			chain.doFilter(req, resp);
 		}else {
 			/*RequestDispatcher dispatcher = req.getRequestDispatcher("/loginModule/toLogin.php");

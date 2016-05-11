@@ -110,4 +110,10 @@ public class UserServiceImpl implements UserService{
 		int sign = userLoginLogMapper.insert(log);
 		return sign;
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getUserByGroup(int groupID) {
+		List<HashMap<String, Object>> userList = userInfoMapper.getUserByGroup(groupID);
+		return userList;
+	}
 }

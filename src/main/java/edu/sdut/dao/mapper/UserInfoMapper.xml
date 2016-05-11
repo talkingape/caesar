@@ -203,4 +203,11 @@
   		user_info
   	WHERE name=#{name}
   </select>
+  <select id="getUserByGroup" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+  		id,name
+  	FROM
+  		user_info
+  	WHERE group_id=#{groupID}
+  </select>
 </mapper>

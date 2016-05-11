@@ -25,7 +25,7 @@ public class TaskInfo {
 
     private Date createTime;
 
-    private Date expextTime;
+    private Date expectTime;
 
     private Integer taskTime;
 
@@ -123,12 +123,12 @@ public class TaskInfo {
         this.createTime = createTime;
     }
 
-    public Date getExpextTime() {
-        return expextTime;
+    public Date getExpectTime() {
+        return expectTime;
     }
 
-    public void setExpextTime(Date expextTime) {
-        this.expextTime = expextTime;
+    public void setExpectTime(Date expectTime) {
+        this.expectTime = expectTime;
     }
 
     public Integer getTaskTime() {

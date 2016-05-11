@@ -24,4 +24,6 @@ public interface UserInfoMapper {
     long getUserListCount(HashMap<String,Object> userInfo);
     
     int isExistUser(String name);
+    
+    List<HashMap<String,Object>> getUserByGroup(int groupID);
 }

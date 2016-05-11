@@ -13,7 +13,7 @@
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="priority" property="priority" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="expext_time" property="expextTime" jdbcType="TIMESTAMP" />
+    <result column="expect_time" property="expectTime" jdbcType="TIMESTAMP" />
     <result column="task_time" property="taskTime" jdbcType="INTEGER" />
     <result column="completion" property="completion" jdbcType="INTEGER" />
     <result column="describe" property="describe" jdbcType="VARCHAR" />
@@ -21,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, code, title, project_id, category, create_user_id, pre_user_id, current_user_id, 
-    status, priority, create_time, expext_time, task_time, completion, describe, remark
+    status, priority, create_time, expect_time, task_time, completion, describe, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,13 +37,13 @@
     insert into task_info (id, code, title, 
       project_id, category, create_user_id, 
       pre_user_id, current_user_id, status, 
-      priority, create_time, expext_time, 
+      priority, create_time, expect_time, 
       task_time, completion, describe, 
       remark)
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, 
       #{preUserId,jdbcType=INTEGER}, #{currentUserId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{expextTime,jdbcType=TIMESTAMP}, 
+      #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{expectTime,jdbcType=TIMESTAMP}, 
       #{taskTime,jdbcType=INTEGER}, #{completion,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
@@ -83,8 +83,8 @@
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="expextTime != null" >
-        expext_time,
+      <if test="expectTime != null" >
+        expect_time,
       </if>
       <if test="taskTime != null" >
         task_time,
@@ -133,8 +133,8 @@
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="expextTime != null" >
-        #{expextTime,jdbcType=TIMESTAMP},
+      <if test="expectTime != null" >
+        #{expectTime,jdbcType=TIMESTAMP},
       </if>
       <if test="taskTime != null" >
         #{taskTime,jdbcType=INTEGER},
@@ -183,8 +183,8 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="expextTime != null" >
-        expext_time = #{expextTime,jdbcType=TIMESTAMP},
+      <if test="expectTime != null" >
+        expect_time = #{expectTime,jdbcType=TIMESTAMP},
       </if>
       <if test="taskTime != null" >
         task_time = #{taskTime,jdbcType=INTEGER},
@@ -213,7 +213,7 @@
       status = #{status,jdbcType=INTEGER},
       priority = #{priority,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      expext_time = #{expextTime,jdbcType=TIMESTAMP},
+      expect_time = #{expectTime,jdbcType=TIMESTAMP},
       task_time = #{taskTime,jdbcType=INTEGER},
       completion = #{completion,jdbcType=INTEGER},
       describe = #{describe,jdbcType=VARCHAR},

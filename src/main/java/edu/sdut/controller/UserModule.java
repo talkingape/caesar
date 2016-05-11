@@ -65,4 +65,11 @@ public class UserModule {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getUserByGroup")
+	public List<HashMap<String,Object>> getUserByGroup(int groupID){
+		List<HashMap<String, Object>> userList = userService.getUserByGroup(groupID);
+		return userList;
+	}
+	
 }

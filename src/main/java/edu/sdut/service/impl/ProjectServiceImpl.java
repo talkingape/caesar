@@ -105,4 +105,12 @@ public class ProjectServiceImpl implements ProjectService{
 		return eJson;
 	}
 
+	@Override
+	public List<HashMap<String, Object>> getProjectByGroup(int groupID) {
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("userGroup", groupID);
+		List<HashMap<String, Object>> projectList = projectInfoMapper.getProjectList(param);
+		return projectList;
+	}
+
 }
