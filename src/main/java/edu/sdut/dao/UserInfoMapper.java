@@ -26,4 +26,6 @@ public interface UserInfoMapper {
     int isExistUser(String name);
     
     List<HashMap<String,Object>> getUserByGroup(int groupID);
+    
+    List<HashMap<String, Object>> getUserByProject(int projectID);
 }

@@ -220,4 +220,21 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getTaskByProjectID" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+	  <![CDATA[
+		SELECT
+			sum(
+				IF(category = 1 AND STATUS < 3, 0, 1)
+			) funcOpen,
+			sum(
+				IF(category = 2 AND STATUS < 3, 0, 1)
+			) bugOpen,
+			sum(IF(category = 1, 0, 1)) funcTotal,
+			sum(IF(category = 2, 0, 1)) bugTotal
+		FROM
+			task_info
+		WHERE
+			project_id = #{projectID}
+	  ]]>
+  </select>
 </mapper>
