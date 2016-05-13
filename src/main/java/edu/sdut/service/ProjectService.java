@@ -19,4 +19,6 @@ public interface ProjectService {
 	public EasyuiDataGridJson getProjectList(HashMap<String, Object> param);
 	
 	public List<HashMap<String, Object>> getProjectByGroup(int groupID);
+	
+	public HashMap<String,Object> getProjectDetail(int projectID);
 }

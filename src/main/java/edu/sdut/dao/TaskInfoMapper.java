@@ -1,5 +1,7 @@
 package edu.sdut.dao;
 
+import java.util.HashMap;
+
 import edu.sdut.model.TaskInfo;
 
 public interface TaskInfoMapper {
@@ -14,4 +16,6 @@ public interface TaskInfoMapper {
     int updateByPrimaryKeySelective(TaskInfo record);
 
     int updateByPrimaryKey(TaskInfo record);
+    
+    HashMap<String,Object> getTaskByProjectID(int projectID);
 }

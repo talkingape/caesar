@@ -116,4 +116,10 @@ public class UserServiceImpl implements UserService{
 		List<HashMap<String, Object>> userList = userInfoMapper.getUserByGroup(groupID);
 		return userList;
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getUserByProject(int projectID) {
+		List<HashMap<String, Object>> userList = userInfoMapper.getUserByProject(projectID);
+		return userList;
+	}
 }

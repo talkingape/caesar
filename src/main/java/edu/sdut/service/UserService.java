@@ -29,4 +29,6 @@ public interface UserService {
 	public int insertLoginLog(UserLoginLog log);
 	
 	public List<HashMap<String,Object>> getUserByGroup(int groupID);
+	
+	public List<HashMap<String,Object>> getUserByProject(int projectID);
 }

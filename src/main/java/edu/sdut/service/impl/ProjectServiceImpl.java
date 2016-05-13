@@ -25,6 +25,8 @@ public class ProjectServiceImpl implements ProjectService{
 	ProjectInfoMapper projectInfoMapper;
 	@Resource
 	ProjectLogMapper projectLogMapper;
+	@Resource
+	TaskInfoMapper taskInfoMapper;
 
 	@Override
 	public boolean addProject(ProjectInfo projectInfo) {
@@ -111,6 +113,12 @@ public class ProjectServiceImpl implements ProjectService{
 		param.put("userGroup", groupID);
 		List<HashMap<String, Object>> projectList = projectInfoMapper.getProjectList(param);
 		return projectList;
+	}
+
+	@Override
+	public HashMap<String, Object> getProjectDetail(int projectID) {
+		HashMap<String, Object> productDetail = taskInfoMapper.getTaskByProjectID(projectID);
+		return productDetail;
 	}
 
 }

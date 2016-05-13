@@ -18,28 +18,28 @@ import edu.sdut.util.EasyuiDataGridJson;
 @Controller
 @RequestMapping("/projectModule")
 public class ProjectModule {
-	
+
 	@Resource
 	ProjectService projectService;
 	@Resource
 	UserService userService;
-	
+
 	@RequestMapping("/toAddProject")
-	public String toAddProject(HttpServletRequest request){
+	public String toAddProject(HttpServletRequest request) {
 		List<UserGroup> userGroup = userService.selectAllGroup();
 		request.setAttribute("userGroup", userGroup);
 		return "addNewProject";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/addProject")
-	public String addProject(HttpServletRequest request){
+	public String addProject(HttpServletRequest request) {
 		String title = request.getParameter("title");
 		String userGroup = request.getParameter("userGroup");
 		int groupId = Integer.parseInt(userGroup);
 		String describe = request.getParameter("describe");
 		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
-		ProjectInfo projectInfo=new ProjectInfo();
+		ProjectInfo projectInfo = new ProjectInfo();
 		projectInfo.setTitle(title);
 		projectInfo.setGroupId(groupId);
 		projectInfo.setCreateUserId(user.getId());
@@ -50,19 +50,34 @@ public class ProjectModule {
 		}
 		return "failed";
 	}
-	
+
 	@RequestMapping("/toProjectList")
-	public String toProjectList(HttpServletRequest request){
+	public String toProjectList(HttpServletRequest request) {
 		List<UserGroup> userGroup = userService.selectAllGroup();
 		request.setAttribute("userGroup", userGroup);
 		return "projectList";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/getProjectList")
-	public EasyuiDataGridJson getProjectList(HttpServletRequest request){
+	public EasyuiDataGridJson getProjectList(HttpServletRequest request) {
 		HashMap<String, Object> param = projectService.getParamFromReq(request);
 		EasyuiDataGridJson projectList = projectService.getProjectList(param);
 		return projectList;
 	}
+
+	@RequestMapping("/toProjectDetail")
+	public String toProjectDetail(HttpServletRequest request) {
+		String projectIDs = request.getParameter("projectID");
+		int projectID = 0;
+		if (projectIDs != null && "".equals(projectIDs)) {
+			projectID = Integer.parseInt(projectIDs);
+		}
+		HashMap<String, Object> projectDetail = projectService.getProjectDetail(projectID);
+		List<HashMap<String, Object>> userList = userService.getUserByProject(projectID);
+		request.setAttribute("projectDetail", projectDetail);
+		request.setAttribute("userList", userList);
+		return "projectDetail";
+	}
+
 }

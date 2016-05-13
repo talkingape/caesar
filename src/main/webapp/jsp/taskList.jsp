@@ -22,8 +22,8 @@
 							</tr>
 							<tr style="height: 36px">
 								<td style="width: 8%">创建用户</td>
-								<td><select id="createUserId"
-									name="createUserId" class="js-example-basic-single" style="width: 50%">
+								<td><select id="createUserID"
+									name="createUserID" class="js-example-basic-single" style="width: 42%">
 									<option value="-1">请选择</option>
 										<c:forEach items="${userList }" var="item">
 											<option value="${item.id }">${item.name }</option>
@@ -32,8 +32,8 @@
 							</tr>
 							<tr>
 								<td>指派给</td>
-								<td><select id="currentUserId"
-									name="currentUserId" class="js-example-basic-single" style="width: 50%">
+								<td><select id="currentUserID"
+									name="currentUserID" class="js-example-basic-single" style="width: 42%">
 									<option value="-1">请选择</option>
 										<c:forEach items="${userList }" var="item">
 											<option value="${item.id }">${item.name }</option>
@@ -109,6 +109,8 @@
 </html>
 <script type="text/javascript" charset="UTF-8">
 $(function() {
+	$("#createUserID").select2();
+	$("#currentUserID").select2();
 	$("#category").select2();
 	$("#projectID").select2();
 	$("#priority").select2();
