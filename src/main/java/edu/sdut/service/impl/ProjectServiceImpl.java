@@ -31,13 +31,12 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public boolean addProject(ProjectInfo projectInfo) {
 		projectInfo.setCreateTime(new Date());
-		projectInfo.setStatus(1);
 		projectInfo.setCode(CommonUtil.genProCode(projectInfo.getGroupId(), projectInfo.getCreateUserId()));
 		int id = projectInfoMapper.insertSelective(projectInfo);
 		if (id>0) {
 			ProjectLog projectLog=new ProjectLog();
 			projectLog.setPreStatus(0);
-			projectLog.setAfterStatus(0);
+			projectLog.setAfterStatus(projectInfo.getStatus());
 			projectLog.setOperaterId(projectInfo.getCreateUserId());
 			projectLog.setDescribe("新建项目");
 			projectLog.setOperateTime(new Date());
@@ -116,9 +115,33 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public HashMap<String, Object> getProjectDetail(int projectID) {
-		HashMap<String, Object> productDetail = taskInfoMapper.getTaskByProjectID(projectID);
-		return productDetail;
+	public HashMap<String, Object> getProjectOverView(int projectID) {
+		HashMap<String, Object> productOverView = taskInfoMapper.getOverViewByProjectID(projectID);
+		return productOverView;
 	}
 
+	@Override
+	public HashMap<String, Object> getProjectDetailByID(int projectID) {
+		HashMap<String, Object> projectDetail = projectInfoMapper.getProjectDetailByID(projectID);
+		return projectDetail;
+	}
+	
+	@Override
+	public boolean editProject(ProjectInfo projectInfo) {
+		ProjectInfo preProject = projectInfoMapper.selectByPrimaryKey(projectInfo.getId());
+		int id = projectInfoMapper.updateByPrimaryKeySelective(projectInfo);
+		if (id>0) {
+			ProjectLog projectLog=new ProjectLog();
+			projectLog.setPreStatus(preProject.getStatus());
+			projectLog.setAfterStatus(projectInfo.getStatus());
+			projectLog.setOperaterId(projectInfo.getCreateUserId());
+			projectLog.setDescribe("编辑项目");
+			projectLog.setOperateTime(new Date());
+			projectLog.setProjectId(id);
+			this.addProjectLog(projectLog);
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

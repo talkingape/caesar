@@ -17,5 +17,5 @@ public interface TaskInfoMapper {
 
     int updateByPrimaryKey(TaskInfo record);
     
-    HashMap<String,Object> getTaskByProjectID(int projectID);
+    HashMap<String,Object> getOverViewByProjectID(int projectID);
 }

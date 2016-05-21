@@ -92,6 +92,9 @@ $(function() {
 						singleSelect : false,
 						columns : [ [
 								{
+									field : 'id',
+									hidden : true
+								},{
 									field : 'code',
 									title : '项目编码',
 									width : 60,
@@ -100,7 +103,7 @@ $(function() {
 									title : '项目标题',
 									width : 60,
 								},{
-									field : 'createUserName',
+									field : 'userName',
 									title : '创建用户',
 									width : 60,
 								},{
@@ -109,8 +112,24 @@ $(function() {
 									width : 60,
 								},{
 									field : 'status',
+									hidden : true,
+								},{
+									field : 'statusName',
 									title : '项目状态',
 									width : 60,
+									formatter : function(value, row, index){
+										if(row.status==1){
+											return "新建";
+										}else if(row.status==2){
+											return "开发中";
+										}else if(row.status==3){
+											return "已上线";
+										}else if(row.status==4){
+											return "已关闭";
+										}else{
+											return "未知";
+										}
+									}
 								},{
 									field : 'createDateTime',
 									title : '创建日期',
@@ -124,8 +143,8 @@ $(function() {
 									width : 60,
 									formatter : function(value, row, index){
 										var str="";
-										str+="<a href='javascript:void(0)'>编辑</a>";
-										str+="&nbsp;&nbsp;<a href='javascript:void(0)'>详情</a>";
+										str+="<a href='${path}/projectModule/toEditProject.php?projectID="+row.id+"'>编辑</a>";
+										str+="&nbsp;&nbsp;<a href='${path}/projectModule/toProjectDetail.php?projectID="+row.id+"'>详情</a>";
 										return str;
 									}
 								}] ],

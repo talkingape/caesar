@@ -144,11 +144,11 @@
   <select id="getProjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
   	SELECT
 		pi.id,
-		pi. CODE,
+		pi.code,
 		pi.title,
-		ui. NAME userName,
-		ug. NAME userGroup,
-		pi. STATUS,
+		ui.name userName,
+		ug.name userGroup,
+		pi.status,
 		pi.create_time createDateTime
 	FROM
 		project_info pi
@@ -203,5 +203,20 @@
 			</if>
 		</if>
 	</where>
+  </select>
+  <select id="getProjectDetailByID" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		pi.id,
+		pi.code,
+		pi.title,
+		pi.status,
+		pi.group_id userGroup,
+		ui.name userName,
+		pi.create_time createDateTime,
+		pi.describe
+	FROM
+		project_info pi
+	LEFT JOIN user_info ui ON pi.create_user_id = ui.id
+	WHERE pi.id=#{projectID}
   </select>
 </mapper>

@@ -38,12 +38,15 @@ public class ProjectModule {
 		String userGroup = request.getParameter("userGroup");
 		int groupId = Integer.parseInt(userGroup);
 		String describe = request.getParameter("describe");
+		String curStatus =request.getParameter("curStatus");
+		int status =Integer.parseInt(curStatus);
 		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 		ProjectInfo projectInfo = new ProjectInfo();
 		projectInfo.setTitle(title);
 		projectInfo.setGroupId(groupId);
 		projectInfo.setCreateUserId(user.getId());
 		projectInfo.setDescribe(describe);
+		projectInfo.setStatus(status);
 		boolean sign = projectService.addProject(projectInfo);
 		if (sign) {
 			return "success";
@@ -70,14 +73,52 @@ public class ProjectModule {
 	public String toProjectDetail(HttpServletRequest request) {
 		String projectIDs = request.getParameter("projectID");
 		int projectID = 0;
-		if (projectIDs != null && "".equals(projectIDs)) {
+		if (projectIDs != null && !"".equals(projectIDs)) {
 			projectID = Integer.parseInt(projectIDs);
 		}
-		HashMap<String, Object> projectDetail = projectService.getProjectDetail(projectID);
+		HashMap<String, Object> projectOverView = projectService.getProjectOverView(projectID);
 		List<HashMap<String, Object>> userList = userService.getUserByProject(projectID);
-		request.setAttribute("projectDetail", projectDetail);
+		HashMap<String, Object> projectDetail = projectService.getProjectDetailByID(projectID);
+		request.setAttribute("projectOverView", projectOverView);
 		request.setAttribute("userList", userList);
+		request.setAttribute("projectDetail", projectDetail);
 		return "projectDetail";
 	}
+	
+	@RequestMapping("/toEditProject")
+	public String toEditProject(HttpServletRequest request){
+		String projectIDs = request.getParameter("projectID");
+		int projectID = 0;
+		if (projectIDs != null && !"".equals(projectIDs)) {
+			projectID = Integer.parseInt(projectIDs);
+		}
+		List<UserGroup> userGroup = userService.selectAllGroup();
+		request.setAttribute("userGroup", userGroup);
+		HashMap<String, Object> projectDetail = projectService.getProjectDetailByID(projectID);
+		request.setAttribute("projectDetail", projectDetail);
+		return "editProject";
+	}
 
+	@RequestMapping("/editProject")
+	public String editProject(HttpServletRequest request){
+		String ids = request.getParameter("projectID");
+		int id =Integer.parseInt(ids);
+		String userGroup = request.getParameter("userGroup");
+		int groupId = Integer.parseInt(userGroup);
+		String describe = request.getParameter("describe");
+		String curStatus =request.getParameter("curStatus");
+		int status =Integer.parseInt(curStatus);
+		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+		ProjectInfo projectInfo = new ProjectInfo();
+		projectInfo.setId(id);
+		projectInfo.setGroupId(groupId);
+		projectInfo.setCreateUserId(user.getId());
+		projectInfo.setDescribe(describe);
+		projectInfo.setStatus(status);
+		boolean sign = projectService.editProject(projectInfo);
+		if (sign) {
+			return "success";
+		}
+		return "failed";
+	}
 }

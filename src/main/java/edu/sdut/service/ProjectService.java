@@ -20,5 +20,9 @@ public interface ProjectService {
 	
 	public List<HashMap<String, Object>> getProjectByGroup(int groupID);
 	
-	public HashMap<String,Object> getProjectDetail(int projectID);
+	public HashMap<String,Object> getProjectOverView(int projectID);
+	
+	public HashMap<String,Object> getProjectDetailByID(int projectID);
+
+	public boolean editProject(ProjectInfo projectInfo);
 }

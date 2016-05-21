@@ -1,9 +1,15 @@
 package edu.sdut.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
-    private Integer id;
+public class UserInfo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6804483292358064879L;
+
+	private Integer id;
 
     private String name;
 
