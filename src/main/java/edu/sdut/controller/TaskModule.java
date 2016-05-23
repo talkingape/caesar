@@ -50,6 +50,14 @@ public class TaskModule {
 	@ResponseBody
 	@RequestMapping("/getTaskList")
 	public EasyuiDataGridJson getTaskList(HttpServletRequest request){
-		return null;
+		HashMap<String, Object> param = taskService.getParamFromReq(request);
+		EasyuiDataGridJson taskList = taskService.getTaskList(param);
+		return taskList;
+	}
+	
+	@RequestMapping("/editTask")
+	public String editTask(HttpServletRequest request){
+		
+		return "editTask";
 	}
 }

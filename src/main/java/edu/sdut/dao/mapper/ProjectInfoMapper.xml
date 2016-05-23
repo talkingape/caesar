@@ -156,20 +156,20 @@
 	LEFT JOIN user_group ug ON pi.group_id = ug.id
 	<where>
 		<if test="projectName != null and projectName != ''">
-			pi.title=#{projectName}
+			AND pi.title=#{projectName}
 		</if>
 		<if test="userName != null and userName != ''">
-			ui.name=#{userName}
+			AND ui.name=#{userName}
 		</if>
 		<if test="userGroup != null and userGroup != ''">
-			ug.name=#{userGroup}
+			AND ug.id=#{userGroup}
 		</if>
 		<if test="projectStatus != null and projectStatus != ''">
-			pi.status=#{projectStatus}
+			AND pi.status=#{projectStatus}
 		</if>
 		<if test="createTimeBegin != null and createTimeBegin != ''">
 			<if test="createTimeEnd != null and createTimeEnd !=''">
-				pi.create_time between #{createTimeBegin} and #{createTimeEnd}
+				AND pi.create_time between #{createTimeBegin} and #{createTimeEnd}
 			</if>
 		</if>
 	</where>
@@ -186,20 +186,20 @@
 	LEFT JOIN user_group ug ON pi.group_id = ug.id
 	<where>
 		<if test="projectName != null and projectName != ''">
-			pi.title=#{projectName}
+			AND pi.title=#{projectName}
 		</if>
 		<if test="userName != null and userName != ''">
-			ui.name=#{userName}
+			AND ui.name=#{userName}
 		</if>
 		<if test="userGroup != null and userGroup != ''">
-			ug.name=#{userGroup}
+			AND ug.id=#{userGroup}
 		</if>
 		<if test="projectStatus != null and projectStatus != ''">
-			pi.status=#{projectStatus}
+			AND pi.status=#{projectStatus}
 		</if>
 		<if test="createTimeBegin != null and createTimeBegin != ''">
 			<if test="createTimeEnd != null and createTimeEnd !=''">
-				pi.create_time between #{createTimeBegin} and #{createTimeEnd}
+				AND pi.create_time between #{createTimeBegin} and #{createTimeEnd}
 			</if>
 		</if>
 	</where>

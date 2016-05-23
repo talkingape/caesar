@@ -18,7 +18,7 @@
 							<tr style="height: 36px">
 								<td style="width: 8%">任务标题</td>
 								<td style="width: 64%"><input class="easyui-textbox"
-									id="projectName" name="projectName" style="width: 42%; height: 32px;"></td>
+									id="taskTitle" name="taskTitle" style="width: 42%; height: 32px;"></td>
 							</tr>
 							<tr style="height: 36px">
 								<td style="width: 8%">创建用户</td>
@@ -53,7 +53,7 @@
 									name="projectID" class="js-example-basic-single" style="width: 42%">
 									<option value="-1">请选择</option>
 										<c:forEach items="${projectList }" var="item">
-											<option value="${item.id }">${item.name }</option>
+											<option value="${item.id }">${item.title }</option>
 										</c:forEach>
 									</select></td>
 							</tr>
@@ -86,8 +86,8 @@
 							<tr style="height: 36px">
 								<td>预计完成</td>
 								<td><input class="easyui-datebox"
-									id="createTime" name="createTimeBegin" style="width: 32%; height: 32px;">至<input class="easyui-datebox"
-									id="createTime" name="createTimeEnd" style="width: 32%; height: 32px;"></td>
+									id="expectTimeBegin" name="expectTimeBegin" style="width: 32%; height: 32px;">至<input class="easyui-datebox"
+									id="expectimeEnd" name="expectimeEnd" style="width: 32%; height: 32px;"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -100,7 +100,7 @@
 		</fieldset>
 	</div>
 	<div style="width: 81%; margin-left: auto; margin-right: auto;margin-top: 1%">
-		<table id="dataGrid"></table>
+		<table id="dataGrid" style="width: auto"></table>
 	</div>
 </body>
 <footer>
@@ -119,12 +119,12 @@ $(function() {
 			.datagrid(
 					{
 						fit : false,
-						fitColumns : true,
 						pagination : true,
 						url : 'getTaskList.php',
 						idField : 'id',
 						pageSize : 30,
 						pageList : [ 10, 20, 30, 40, 50 ],
+						fitColumns : true,
 						striped : true,
 						nowrap : true,
 						rownumbers : true,
@@ -142,8 +142,15 @@ $(function() {
 									field : 'category',
 									title : '任务类别',
 									width : 60,
+									formatter : function(value,row,index){
+										if(value==1){
+											return "功能研发";
+										}else if(value==2){
+											return "BUG修复";
+										}
+									}
 								},{
-									field : 'projectName',
+									field : 'projectTitle',
 									title : '所属项目',
 									width : 60,
 								},{
@@ -156,16 +163,45 @@ $(function() {
 									width : 60,
 								},{
 									field : 'status',
-									title : '项目状态',
+									title : '任务状态',
 									width : 60,
+									formatter : function(value,row,index){
+										if(value==1){
+											return "新建";
+										}else if(value==2){
+											if(row.category==1){
+												return "研发中";
+											}else if(row.category==2){
+												return "修复中";
+											}
+										}else if(value==3){
+											return "已完成";
+										}else if(value==4){
+											return "已废弃";
+										}
+									}
 								},{
 									field : 'completion',
 									title : '完成度',
 									width : 60,
+									formatter : function(value,row,index){
+										return value+"%";
+									}
 								},{
 									field : 'priority',
 									title : '优先级',
 									width : 60,
+									formatter : function(value,row,index){
+										if(value==1){
+											return "紧急";
+										}else if(value==2){
+											return "高";
+										}else if(value==3){
+											return "普通";
+										}else if(value==4){
+											return "低";
+										}
+									}
 								},{
 									field : 'createDateTime',
 									title : '创建日期',

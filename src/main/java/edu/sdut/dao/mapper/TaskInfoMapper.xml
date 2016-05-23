@@ -237,4 +237,101 @@
 			project_id = #{projectID}
 	  ]]>
   </select>
+  <select id="getTaskList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  	SELECT
+		ti.code,
+		ti.title,
+		ti.category,
+		pi.title projectTitle,
+		uicr.name createUserName,
+		uicu.name currentUserName,
+		ti.status,
+		ti.completion,
+		ti.priority,
+		ti.create_time createDateTime,
+		ti.expect_time expectDateTime
+	FROM
+		task_info ti
+	LEFT JOIN project_info pi ON ti.project_id = pi.id
+	LEFT JOIN user_info uicr ON ti.create_user_id = uicr.id
+	LEFT JOIN user_info uicu ON ti.create_user_id = uicu.id
+	<where>
+		<if test="taskTitle != null and taskTitle != ''">
+			AND ti.title=#{taskTitle}
+		</if>
+		<if test="createUserID != null and createUserID != ''">
+			AND uicr.id=#{createUserID}
+		</if>
+		<if test="currentUserID != null and currentUserID != ''">
+			AND uicu.id=#{currentUserID}
+		</if>
+		<if test="category != null and category != ''">
+			AND ti.category=#{category}
+		</if>
+		<if test="projectID != null and projectID != ''">
+			AND pi.id=#{projectID}
+		</if>
+		<if test="status != null and status != ''">
+			AND ti.status=#{status}
+		</if>
+		<if test="priority != null and priority != ''">
+			AND ti.priority=#{priority}
+		</if>
+		<if test="createTimeBegin != null and createTimeBegin != ''">
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				AND ti.create_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+		<if test="expectTimeBegin != null and expectTimeBegin != ''">
+			<if test="expectTimeEnd != null and expectTimeEnd !=''">
+				AND ti.expect_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+	</where>
+	<if test="begin!=null and step!=null">
+		LIMIT #{begin},#{step}
+	</if>
+  </select>
+  <select id="getTaskListCount" parameterType="java.util.HashMap" resultType="java.lang.Long">
+  	SELECT
+		count(*)
+	FROM
+		task_info ti
+	LEFT JOIN project_info pi ON ti.project_id = pi.id
+	LEFT JOIN user_info uicr ON ti.create_user_id = uicr.id
+	LEFT JOIN user_info uicu ON ti.create_user_id = uicu.id
+	<where>
+		<if test="taskTitle != null and taskTitle != ''">
+			AND ti.title=#{taskTitle}
+		</if>
+		<if test="createUserID != null and createUserID != ''">
+			AND uicr.id=#{createUserID}
+		</if>
+		<if test="currentUserID != null and currentUserID != ''">
+			AND uicu.id=#{currentUserID}
+		</if>
+		<if test="category != null and category != ''">
+			AND ti.category=#{category}
+		</if>
+		<if test="projectID != null and projectID != ''">
+			AND pi.id=#{projectID}
+		</if>
+		<if test="status != null and status != ''">
+			AND ti.status=#{status}
+		</if>
+		<if test="priority != null and priority != ''">
+			AND ti.priority=#{priority}
+		</if>
+		<if test="createTimeBegin != null and createTimeBegin != ''">
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				AND ti.create_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+		<if test="expectTimeBegin != null and expectTimeBegin != ''">
+			<if test="expectTimeEnd != null and expectTimeEnd !=''">
+				AND ti.expect_time between #{createTimeBegin} and #{createTimeEnd}
+			</if>
+		</if>
+	</where>
+  </select>
 </mapper>

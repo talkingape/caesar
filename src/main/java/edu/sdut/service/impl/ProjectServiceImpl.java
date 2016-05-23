@@ -1,5 +1,7 @@
 package edu.sdut.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +29,8 @@ public class ProjectServiceImpl implements ProjectService{
 	ProjectLogMapper projectLogMapper;
 	@Resource
 	TaskInfoMapper taskInfoMapper;
+	
+	private SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 	@Override
 	public boolean addProject(ProjectInfo projectInfo) {
@@ -62,10 +66,10 @@ public class ProjectServiceImpl implements ProjectService{
 	public HashMap<String, Object> getParamFromReq(HttpServletRequest request) {
 		String projectName = request.getParameter("projectName");
 		String userName = request.getParameter("userName");
-		String userGroup = request.getParameter("userGroup");
-		String projectStatus = request.getParameter("projectStatus");
-		String createTimeBegin = request.getParameter("createTimeBegin");
-		String createTimeEnd = request.getParameter("createTimeEnd");
+		String userGroupStr = request.getParameter("userGroup");
+		String projectStatusStr = request.getParameter("projectStatus");
+		String createTimeBeginStr = request.getParameter("createTimeBegin");
+		String createTimeEndStr = request.getParameter("createTimeEnd");
 		String pageStr = request.getParameter("page");
 		String rowsStr = request.getParameter("rows");
 		HashMap<String,Object> param =new HashMap<String,Object>();
@@ -75,17 +79,19 @@ public class ProjectServiceImpl implements ProjectService{
 		if (!StringUtils.isEmpty(userName)) {
 			param.put("userName", userName);
 		}
-		if (!StringUtils.isEmpty(userGroup)) {
-			param.put("userGroup", userGroup);
+		if (!StringUtils.isEmpty(userGroupStr)&&!userGroupStr.equals("-1")) {
+			param.put("userGroup", Integer.parseInt(userGroupStr));
 		}
-		if (!StringUtils.isEmpty(projectStatus)) {
-			param.put("projectStatus", projectStatus);
+		if (!StringUtils.isEmpty(projectStatusStr)&&!projectStatusStr.equals("-1")) {
+			param.put("projectStatus", Integer.parseInt(projectStatusStr));
 		}
-		if (!StringUtils.isEmpty(createTimeBegin)) {
-			param.put("createTimeBegin", createTimeBegin);
-		}
-		if (!StringUtils.isEmpty(createTimeEnd)) {
-			param.put("createTimeEnd", createTimeEnd);
+		try {
+			if (!StringUtils.isEmpty(createTimeBeginStr)&&!StringUtils.isEmpty(createTimeEndStr)) {
+				param.put("createTimeBegin", sdf.parse(createTimeBeginStr+" 00:00:00"));
+				param.put("createTimeEnd", sdf.parse(createTimeEndStr+" 23:59:59"));
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		if (!StringUtils.isEmpty(pageStr)&&!StringUtils.isEmpty(rowsStr)) {
 			int page = Integer.parseInt(pageStr);

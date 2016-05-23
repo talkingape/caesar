@@ -1,6 +1,7 @@
 package edu.sdut.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import edu.sdut.model.TaskInfo;
 
@@ -18,4 +19,8 @@ public interface TaskInfoMapper {
     int updateByPrimaryKey(TaskInfo record);
     
     HashMap<String,Object> getOverViewByProjectID(int projectID);
+    
+    List<HashMap<String, Object>> getTaskList(HashMap<String,Object> param);
+
+	Long getTaskListCount(HashMap<String, Object> param);
 }
