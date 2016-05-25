@@ -27,7 +27,7 @@
 							id="userID" name="userID" value="${projectDetail.code }" disabled="disabled" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
-						<td>分配组别</td><td><select id="userGroup"
+						<td>分配组别</td><td><select id="userGroup" disabled="disabled"
 							name="userGroup" class="js-example-basic-single" style="width: 50%">
 							<option value="-1">请选择</option>
 								<c:forEach items="${userGroup }" var="item">
@@ -44,10 +44,10 @@
 						<td>当前状态</td><td><select id="curStatus"
 							name="curStatus" class="js-example-basic-single" style="width: 50%">
 							<option value="-1">请选择</option>
-							<option value="1">新建</option>
-							<option value="2">开发中</option>
-							<option value="3">已上线</option>
-							<option value="4">已关闭</option>
+							<option value="1" <c:if test="${projectDetail.status==1 }"> selected="selected"</c:if> >新建</option>
+							<option value="2" <c:if test="${projectDetail.status==2 }"> selected="selected"</c:if> >开发中</option>
+							<option value="3" <c:if test="${projectDetail.status==3 }"> selected="selected"</c:if> >已上线</option>
+							<option value="4" <c:if test="${projectDetail.status==4 }"> selected="selected"</c:if> >已关闭</option>
 							</select></td>
 					</tr>
 					<tr>

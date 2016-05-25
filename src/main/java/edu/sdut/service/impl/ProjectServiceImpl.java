@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import edu.sdut.dao.*;
@@ -32,6 +33,7 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	private SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+	@Transactional
 	@Override
 	public boolean addProject(ProjectInfo projectInfo) {
 		projectInfo.setCreateTime(new Date());
@@ -133,14 +135,14 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 	
 	@Override
-	public boolean editProject(ProjectInfo projectInfo) {
+	public boolean editProject(ProjectInfo projectInfo,int userID) {
 		ProjectInfo preProject = projectInfoMapper.selectByPrimaryKey(projectInfo.getId());
 		int id = projectInfoMapper.updateByPrimaryKeySelective(projectInfo);
 		if (id>0) {
 			ProjectLog projectLog=new ProjectLog();
 			projectLog.setPreStatus(preProject.getStatus());
 			projectLog.setAfterStatus(projectInfo.getStatus());
-			projectLog.setOperaterId(projectInfo.getCreateUserId());
+			projectLog.setOperaterId(userID);
 			projectLog.setDescribe("编辑项目");
 			projectLog.setOperateTime(new Date());
 			projectLog.setProjectId(id);

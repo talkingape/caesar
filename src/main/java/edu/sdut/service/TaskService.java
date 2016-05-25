@@ -16,4 +16,8 @@ public interface TaskService {
 	public HashMap<String,Object> getParamFromReq(HttpServletRequest request);
 	
 	public EasyuiDataGridJson getTaskList(HashMap<String, Object> param);
+	
+	public TaskInfo getTaskInfo(int taskID);
+	
+	public boolean editTask(TaskInfo taskInfo,int userID);
 }

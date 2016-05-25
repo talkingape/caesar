@@ -29,8 +29,8 @@
 			<div style="margin-left: 24px;margin-top: 9px">
 				<table>
 					<tbody>
-						<tr><td><a href="javascript:void(0)">功能开发</a></td><td>${projectOverView.funcOpen} 打开/${projectOverView.funcTotal}总数</td></tr>
-						<tr><td><a href="javascript:void(0)">BUG修复</a></td><td>${projectOverView.bugOpen} 打开/${projectOverView.bugTotal}总数</td></tr>
+						<tr><td><a href="javascript:void(0)">功能开发</a></td><td><c:if test="${!empty projectOverView.funcOpen}">${projectOverView.funcOpen}</c:if><c:if test="${empty projectOverView.funcOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.funcTotal}">${projectOverView.funcTotal}</c:if><c:if test="${empty projectOverView.funcTotal}">0</c:if>总数</td></tr>
+						<tr><td><a href="javascript:void(0)">BUG修复</a></td><td><c:if test="${!empty projectOverView.bugOpen}">${projectOverView.bugOpen}</c:if><c:if test="${empty projectOverView.bugOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.bugTotal}">${projectOverView.bugTotal}</c:if><c:if test="${empty projectOverView.bugTotal}">0</c:if>总数</td></tr>
 						<tr><td colspan="2"><a href="javascript:void(0)">查看所有问题</a></td></tr>
 					</tbody>
 				</table>
@@ -73,7 +73,7 @@
 	<div align="center" style="width: 81%; margin-left: auto; margin-right: auto; margin-top: 2%;margin-bottom: 1%">
 		<fieldset style="top: 2%;margin-top: 2%;width: 91%;height: 46%">
 			<legend>描述</legend>
-			<textarea readonly="readonly" style="width: 98%;height: 98%">${projectDetail.describe }</textarea>
+			<textarea readonly="readonly" style="width: 98%;height: 98%">${projectDetail.p_describe }</textarea>
 		</fieldset>
 	</div>
 </div>

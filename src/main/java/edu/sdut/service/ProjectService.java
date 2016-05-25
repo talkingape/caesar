@@ -24,5 +24,5 @@ public interface ProjectService {
 	
 	public HashMap<String,Object> getProjectDetailByID(int projectID);
 
-	public boolean editProject(ProjectInfo projectInfo);
+	public boolean editProject(ProjectInfo projectInfo,int userID);
 }

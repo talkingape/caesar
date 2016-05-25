@@ -16,12 +16,12 @@
     <result column="expect_time" property="expectTime" jdbcType="TIMESTAMP" />
     <result column="task_time" property="taskTime" jdbcType="INTEGER" />
     <result column="completion" property="completion" jdbcType="INTEGER" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="t_describe" property="describe" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, code, title, project_id, category, create_user_id, pre_user_id, current_user_id, 
-    status, priority, create_time, expect_time, task_time, completion, describe, remark
+    status, priority, create_time, expect_time, task_time, completion, t_describe, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -38,7 +38,7 @@
       project_id, category, create_user_id, 
       pre_user_id, current_user_id, status, 
       priority, create_time, expect_time, 
-      task_time, completion, describe, 
+      task_time, completion, t_describe, 
       remark)
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, 
@@ -93,7 +93,7 @@
         completion,
       </if>
       <if test="describe != null" >
-        describe,
+        t_describe,
       </if>
       <if test="remark != null" >
         remark,
@@ -193,7 +193,7 @@
         completion = #{completion,jdbcType=INTEGER},
       </if>
       <if test="describe != null" >
-        describe = #{describe,jdbcType=VARCHAR},
+        t_describe = #{describe,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -216,7 +216,7 @@
       expect_time = #{expectTime,jdbcType=TIMESTAMP},
       task_time = #{taskTime,jdbcType=INTEGER},
       completion = #{completion,jdbcType=INTEGER},
-      describe = #{describe,jdbcType=VARCHAR},
+      t_describe = #{describe,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -239,6 +239,7 @@
   </select>
   <select id="getTaskList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
   	SELECT
+  		ti.id,
 		ti.code,
 		ti.title,
 		ti.category,

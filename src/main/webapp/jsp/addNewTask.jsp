@@ -11,7 +11,7 @@
 <div style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 1%">
 	<fieldset>
 		<legend>新建任务</legend>
-		<form>
+		<form id="newTask">
 			<table>
 				<tbody>
 					<tr>
@@ -24,14 +24,14 @@
 					</tr>
 					<tr>
 						<td>任务名称</td><td><input class="easyui-textbox"
-							id="userID" name="userID" style="width: 50%; height: 24px;"></td>
+							id="taskTitle" name="taskTitle" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
 						<td>所属项目</td><td><select id="projectID"
 							name="projectID" class="js-example-basic-single" style="width: 50%">
 							<option value="-1">请选择</option>
 								<c:forEach items="${projectList }" var="item">
-									<option value="${item.id }">${item.name }</option>
+									<option value="${item.id }">${item.title }</option>
 								</c:forEach>
 							</select></td>
 					</tr>
@@ -67,18 +67,20 @@
 					<tr>
 								<td>预计完成</td>
 								<td><input class="easyui-datebox"
-									id="createTime" name="createTimeBegin" style="width: 50%; height: 24px;"></td>
+									id="expectTime" name="expectTime" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
 						<td>工时</td><td><input class="easyui-textbox"
-							id="userID" name="userID" style="width: 50%; height: 24px;"></td>
+							id="taskTime" name="taskTime" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
-						<td>描述</td><td><textarea rows="12" cols="126"></textarea></td>
+						<td>描述</td><td><textarea id="describe" name="describe" rows="12" cols="126"></textarea></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
+		<div align="right"><a class="easyui-linkbutton" style="width: 80px;"
+					href="javascript:void(0)" onclick="submit()">添加项目</a></div>
 	</fieldset>
 </div>
 </body>
@@ -93,5 +95,22 @@ $(function(){
 	$("#status").select2();
 	$("#priority").select2();
 });
+function submit(){
+	$.ajax({
+        type: "POST",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        url: "addTask.php?"+$("#newTask").serialize(),
+        success: function(data){
+        	if(data=='success'){
+        		refreshAfterCloseShow("添加成功",800);
+        		window.location.href="{path}/projectModule/toTaskList.php";
+        	}else if(data=='failed'){
+        		refreshAfterCloseShow("添加失败",800);
+        	}else{
+        		refreshAfterCloseShow("未知错误",800);
+        	}
+        }
+	});
+}
 </script>
 </html>

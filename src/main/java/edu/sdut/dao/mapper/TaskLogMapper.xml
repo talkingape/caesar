@@ -10,12 +10,12 @@
     <result column="after_status" property="afterStatus" jdbcType="INTEGER" />
     <result column="pre_completion" property="preCompletion" jdbcType="INTEGER" />
     <result column="after_completion" property="afterCompletion" jdbcType="INTEGER" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="op_describe" property="describe" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, task_id, operator, operate_time, pre_status, after_status, pre_completion, after_completion, 
-    describe, remark
+    op_describe, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,7 +30,7 @@
   <insert id="insert" parameterType="edu.sdut.model.TaskLog" >
     insert into task_log (id, task_id, operator, 
       operate_time, pre_status, after_status, 
-      pre_completion, after_completion, describe, 
+      pre_completion, after_completion, op_describe, 
       remark)
     values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{operator,jdbcType=INTEGER}, 
       #{operateTime,jdbcType=TIMESTAMP}, #{preStatus,jdbcType=INTEGER}, #{afterStatus,jdbcType=INTEGER}, 
@@ -65,7 +65,7 @@
         after_completion,
       </if>
       <if test="describe != null" >
-        describe,
+        op_describe,
       </if>
       <if test="remark != null" >
         remark,
@@ -129,7 +129,7 @@
         after_completion = #{afterCompletion,jdbcType=INTEGER},
       </if>
       <if test="describe != null" >
-        describe = #{describe,jdbcType=VARCHAR},
+        op_describe = #{describe,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -146,7 +146,7 @@
       after_status = #{afterStatus,jdbcType=INTEGER},
       pre_completion = #{preCompletion,jdbcType=INTEGER},
       after_completion = #{afterCompletion,jdbcType=INTEGER},
-      describe = #{describe,jdbcType=VARCHAR},
+      op_describe = #{describe,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

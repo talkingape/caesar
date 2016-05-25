@@ -38,7 +38,7 @@ public class ProjectModule {
 		String userGroup = request.getParameter("userGroup");
 		int groupId = Integer.parseInt(userGroup);
 		String describe = request.getParameter("describe");
-		String curStatus =request.getParameter("curStatus");
+		String curStatus =request.getParameter("status");
 		int status =Integer.parseInt(curStatus);
 		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 		ProjectInfo projectInfo = new ProjectInfo();
@@ -101,6 +101,7 @@ public class ProjectModule {
 
 	@RequestMapping("/editProject")
 	public String editProject(HttpServletRequest request){
+		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 		String ids = request.getParameter("projectID");
 		int id =Integer.parseInt(ids);
 		String userGroup = request.getParameter("userGroup");
@@ -108,14 +109,13 @@ public class ProjectModule {
 		String describe = request.getParameter("describe");
 		String curStatus =request.getParameter("curStatus");
 		int status =Integer.parseInt(curStatus);
-		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 		ProjectInfo projectInfo = new ProjectInfo();
 		projectInfo.setId(id);
 		projectInfo.setGroupId(groupId);
 		projectInfo.setCreateUserId(user.getId());
 		projectInfo.setDescribe(describe);
 		projectInfo.setStatus(status);
-		boolean sign = projectService.editProject(projectInfo);
+		boolean sign = projectService.editProject(projectInfo,user.getId());
 		if (sign) {
 			return "success";
 		}

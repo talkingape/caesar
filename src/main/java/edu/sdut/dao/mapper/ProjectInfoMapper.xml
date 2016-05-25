@@ -9,11 +9,11 @@
     <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="p_describe" property="describe" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, code, title, create_time, create_user_id, group_id, status, describe, remark
+    id, code, title, create_time, create_user_id, group_id, status, p_describe, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,7 +28,7 @@
   <insert id="insert" parameterType="edu.sdut.model.ProjectInfo" >
     insert into project_info (id, code, title, 
       create_time, create_user_id, group_id, 
-      status, describe, remark
+      status, p_describe, remark
       )
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
@@ -63,7 +63,7 @@
         status,
       </if>
       <if test="describe != null" >
-        describe,
+        p_describe,
       </if>
       <if test="remark != null" >
         remark,
@@ -121,7 +121,7 @@
         status = #{status,jdbcType=INTEGER},
       </if>
       <if test="describe != null" >
-        describe = #{describe,jdbcType=VARCHAR},
+        p_describe = #{describe,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -137,7 +137,7 @@
       create_user_id = #{createUserId,jdbcType=INTEGER},
       group_id = #{groupId,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      describe = #{describe,jdbcType=VARCHAR},
+      p_describe = #{describe,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -213,7 +213,7 @@
 		pi.group_id userGroup,
 		ui.name userName,
 		pi.create_time createDateTime,
-		pi.describe
+		pi.p_describe
 	FROM
 		project_info pi
 	LEFT JOIN user_info ui ON pi.create_user_id = ui.id

@@ -2,6 +2,7 @@ package edu.sdut.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,12 +10,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import edu.sdut.dao.TaskInfoMapper;
+import edu.sdut.dao.TaskLogMapper;
 import edu.sdut.model.TaskInfo;
 import edu.sdut.model.TaskLog;
 import edu.sdut.service.TaskService;
+import edu.sdut.util.CommonUtil;
 import edu.sdut.util.EasyuiDataGridJson;
 
 @Service("TaskService")
@@ -22,18 +26,41 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Resource
 	TaskInfoMapper taskInfoMapper;
+	@Resource
+	TaskLogMapper taskLogMapper;
 	
 	private SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+	@Transactional
 	@Override
 	public boolean addTask(TaskInfo taskInfo) {
+		taskInfo.setCreateTime(new Date());
+		taskInfo.setCode(CommonUtil.genTaskCode(taskInfo.getProjectId(), taskInfo.getCreateUserId()));
+		int taskID = taskInfoMapper.insert(taskInfo);
+		if (taskID>0) {
+			TaskLog taskLog = new TaskLog();
+			taskLog.setOperateTime(new Date());
+			taskLog.setAfterCompletion(0);
+			taskLog.setAfterStatus(taskInfo.getStatus());
+			taskLog.setDescribe("新建项目");
+			taskLog.setOperator(taskInfo.getCreateUserId());
+			taskLog.setPreCompletion(0);
+			taskLog.setPreStatus(0);
+			taskLog.setTaskId(taskID);
+			this.addTaskLog(taskLog);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean addTaskLog(TaskLog projectLog) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addTaskLog(TaskLog taskLog) {
+		int sign = taskLogMapper.insert(taskLog);
+		if (sign>0) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
@@ -102,6 +129,31 @@ public class TaskServiceImpl implements TaskService{
 		Long total = taskInfoMapper.getTaskListCount(param);
 		eJson.setTotal(total);
 		return eJson;
+	}
+
+	@Override
+	public TaskInfo getTaskInfo(int taskID) {
+		TaskInfo taskInfo = taskInfoMapper.selectByPrimaryKey(taskID);
+		return taskInfo;
+	}
+
+	@Override
+	public boolean editTask(TaskInfo taskInfo,int userID) {
+		TaskInfo preTask = taskInfoMapper.selectByPrimaryKey(taskInfo.getId());
+		int sign = taskInfoMapper.updateByPrimaryKey(taskInfo);
+		if(sign>0){
+			TaskLog taskLog=new TaskLog();
+			taskLog.setPreStatus(preTask.getStatus());
+			taskLog.setAfterStatus(taskInfo.getStatus());
+			taskLog.setOperator(userID);
+			taskLog.setDescribe("编辑项目");
+			taskLog.setOperateTime(new Date());
+			taskLog.setTaskId(taskInfo.getId());
+			this.addTaskLog(taskLog);
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

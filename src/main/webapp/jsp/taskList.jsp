@@ -222,7 +222,7 @@ $(function() {
 									width : 60,
 									formatter : function(value, row, index){
 										var str="";
-										str+="<a href='javascript:void(0)'>编辑</a>";
+										str+="<a href='${path}/taskModule/toEditTask.php?taskID="+row.id+"'>编辑</a>";
 										str+="&nbsp;&nbsp;<a href='javascript:void(0)'>详情</a>";
 										return str;
 									}
