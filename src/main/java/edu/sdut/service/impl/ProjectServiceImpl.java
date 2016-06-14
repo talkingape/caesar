@@ -152,4 +152,10 @@ public class ProjectServiceImpl implements ProjectService{
 			return false;
 		}
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getProjectLog(int projectID) {
+		List<HashMap<String, Object>> projectLog = projectLogMapper.getProjectLog(projectID);
+		return projectLog;
+	}
 }

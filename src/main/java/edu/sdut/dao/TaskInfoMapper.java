@@ -23,4 +23,8 @@ public interface TaskInfoMapper {
     List<HashMap<String, Object>> getTaskList(HashMap<String,Object> param);
 
 	Long getTaskListCount(HashMap<String, Object> param);
+	
+	HashMap<String, Object> getTaskOverView(int taskID);
+
+	HashMap<String, Object> getTaskDetail(int taskID);
 }

@@ -223,7 +223,8 @@ $(function() {
 									formatter : function(value, row, index){
 										var str="";
 										str+="<a href='${path}/taskModule/toEditTask.php?taskID="+row.id+"'>编辑</a>";
-										str+="&nbsp;&nbsp;<a href='javascript:void(0)'>详情</a>";
+										str+="&nbsp;&nbsp;<a href='${path}/taskModule/toTaskDetail.php?taskID="+row.id+"'>详情</a>";
+										str+="&nbsp;&nbsp;<a href='${path}/taskModule/toTaskLog.php?taskID="+row.id+"'>日志</a>";
 										return str;
 									}
 								}] ],

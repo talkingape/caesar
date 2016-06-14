@@ -1,5 +1,8 @@
 package edu.sdut.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import edu.sdut.model.ProjectLog;
 
 public interface ProjectLogMapper {
@@ -14,4 +17,6 @@ public interface ProjectLogMapper {
     int updateByPrimaryKeySelective(ProjectLog record);
 
     int updateByPrimaryKey(ProjectLog record);
+    
+    List<HashMap<String, Object>> getProjectLog(int projectID);
 }

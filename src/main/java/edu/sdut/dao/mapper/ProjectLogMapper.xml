@@ -125,4 +125,17 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getProjectLog" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		pl.operate_time operateTime,
+		pl.pre_status preStatus,
+		pl.after_status afterStatus,
+		pl.op_describe opDescribe,
+		ui.name operater
+	FROM
+		project_log pl
+	JOIN user_info ui ON pl.operater_id = ui.id
+	WHERE
+	project_id=#{projectID}
+  </select>
 </mapper>

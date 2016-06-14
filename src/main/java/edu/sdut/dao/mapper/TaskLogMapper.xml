@@ -150,4 +150,19 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getTaskLog" parameterType="java.lang.Integer" resultType="java.util.HashMap"> 
+  	SELECT
+		tl.operate_time operateTime,
+		tl.pre_status preStatus,
+		tl.after_status afterStatus,
+		tl.pre_completion preCompletion,
+		tl.after_completion afterCompletion,
+		tl.op_describe opDescribe,
+		ui.NAME operator
+	FROM
+		task_log tl
+	JOIN user_info ui ON tl.operator = ui.id
+	WHERE
+		tl.task_id=#{taskID}
+  </select>
 </mapper>

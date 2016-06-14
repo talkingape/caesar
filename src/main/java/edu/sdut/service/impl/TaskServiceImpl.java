@@ -156,4 +156,22 @@ public class TaskServiceImpl implements TaskService{
 		}
 	}
 
+	@Override
+	public HashMap<String, Object> getTaskOverView(int taskID) {
+		HashMap<String, Object> taskOverView = taskInfoMapper.getTaskOverView(taskID);
+		return taskOverView;
+	}
+
+	@Override
+	public HashMap<String, Object> getTaskDetail(int taskID) {
+		HashMap<String, Object> taskDetail = taskInfoMapper.getTaskDetail(taskID);
+		return taskDetail;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getTaskLog(int taskID) {
+		List<HashMap<String, Object>> taskLog = taskLogMapper.getTaskLog(taskID);
+		return taskLog;
+	}
+
 }

@@ -3,14 +3,14 @@
 <%@include file="/jsp/header.jsp"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<title>添加新项目</title>
+<title>编辑任务</title>
 </head>
 <html>
 <body>
 <%@include file="/jsp/topBar.jsp"%>
 <div style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 1%">
 	<fieldset>
-		<legend>新建任务</legend>
+		<legend>编辑任务</legend>
 		<form>
 			<table>
 				<tbody>

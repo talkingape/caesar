@@ -335,4 +335,34 @@
 		</if>
 	</where>
   </select>
+  <select id="getTaskOverView" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		ti.code,
+		ti.category,
+		ti.priority,
+		ti.status,
+		ti.title,
+		ui.name userName,
+		ti.create_time createDateTime
+	FROM
+		task_info ti
+	JOIN user_info ui ON ti.create_user_id=ui.id
+	WHERE ti.id=#{taskID}
+  </select>
+  <select id="getTaskDetail" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		ti.expect_time expectTime,
+		ti.task_time taskTime,
+		ti.completion,
+		ti.t_describe,
+		ti.project_id projectID,
+		pi.title projectTitle,
+		ui.name currentUserName,
+		ui.id
+	FROM
+		task_info ti
+	JOIN user_info ui ON ti.current_user_id=ui.id
+	JOIN project_info pi ON ti.project_id=pi.id
+	WHERE ti.id=#{taskID}
+  </select>
 </mapper>

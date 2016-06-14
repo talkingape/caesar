@@ -121,4 +121,15 @@ public class ProjectModule {
 		}
 		return "failed";
 	}
+	
+	@RequestMapping("/toProjectLog")
+	public String toProjectLog(HttpServletRequest request){
+		String ids = request.getParameter("projectID");
+		int id =Integer.parseInt(ids);
+		List<HashMap<String, Object>> projectLog = projectService.getProjectLog(id);
+		HashMap<String, Object> projectDetail = projectService.getProjectDetailByID(id);
+		request.setAttribute("projectDetail", projectDetail);
+		request.setAttribute("projectLog", projectLog);
+		return "projectLog";
+	}
 }

@@ -138,4 +138,34 @@ public class TaskModule {
 			return "failed";
 		}
 	}
+	
+	@RequestMapping("/toTaskDetail")
+	public String toTaskDetail(HttpServletRequest request) {
+		String taskIDs = request.getParameter("taskID");
+		int taskID = 0;
+		if (taskIDs != null && !"".equals(taskIDs)) {
+			taskID = Integer.parseInt(taskIDs);
+		}
+		HashMap<String, Object> taskOverView = taskService.getTaskOverView(taskID);
+		List<HashMap<String, Object>> userList = userService.getUserByProject(taskID);
+		HashMap<String, Object> taskDetail = taskService.getTaskDetail(taskID);
+		request.setAttribute("taskOverView", taskOverView);
+		request.setAttribute("userList", userList);
+		request.setAttribute("taskDetail", taskDetail);
+		return "taskDetail";
+	}
+	
+	@RequestMapping("/toTaskLog")
+	public String toTaskLog(HttpServletRequest request){
+		String taskIDs = request.getParameter("taskID");
+		int taskID = 0;
+		if (taskIDs != null && !"".equals(taskIDs)) {
+			taskID = Integer.parseInt(taskIDs);
+		}
+		List<HashMap<String, Object>> taskLog = taskService.getTaskLog(taskID);
+		HashMap<String, Object> taskOverView = taskService.getTaskOverView(taskID);
+		request.setAttribute("taskLog", taskLog);
+		request.setAttribute("taskOverView", taskOverView);
+		return "taskLog";
+	}
 }

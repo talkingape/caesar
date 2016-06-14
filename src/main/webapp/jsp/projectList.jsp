@@ -145,6 +145,7 @@ $(function() {
 										var str="";
 										str+="<a href='${path}/projectModule/toEditProject.php?projectID="+row.id+"'>编辑</a>";
 										str+="&nbsp;&nbsp;<a href='${path}/projectModule/toProjectDetail.php?projectID="+row.id+"'>详情</a>";
+										str+="&nbsp;&nbsp;<a href='${path}/projectModule/toProjectLog.php?projectID="+row.id+"'>日志</a>";
 										return str;
 									}
 								}] ],
