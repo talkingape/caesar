@@ -1,6 +1,9 @@
 package edu.sdut.util;
 
 import java.security.MessageDigest;
+import java.util.Scanner;
+
+import org.junit.Test;
 
 public class MD5Util {
 	
@@ -31,4 +34,12 @@ public class MD5Util {
         }
     }
     
+    
+    @Test
+    public void testMd5(){
+    	Scanner sc=new Scanner(System.in);
+    	String str = sc.next();
+    	System.out.println(MD5Util.MD5(str));
+    	sc.close();
+    }
 }

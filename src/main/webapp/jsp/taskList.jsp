@@ -3,11 +3,13 @@
 <%@include file="/jsp/header.jsp"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="curUser" value='<%=(UserInfo)request.getSession().getAttribute("user") %>'/>
 <title>项目列表</title>
 </head>
 <html>
 <body>
 <%@include file="/jsp/topBar.jsp"%>
+<input id="curGroup" hidden="hidden" value="${curUser.groupId }">
 	<div style="width: 81%; margin-left: auto; margin-right: auto;margin-top: 1%">
 		<fieldset style="border: 1px blue dashed">
 			<legend>查询条件</legend>
@@ -43,9 +45,9 @@
 							<tr>
 								<td>任务类别</td><td><select id="category"
 									name="category" class="js-example-basic-single" style="width: 42%">
-									<option value="-1">请选择</option>
-									<option value="1">功能研发</option>
-									<option value="2">BUG修复</option>
+									<option value="-1" <c:if test="${category eq 0 }">selected="selected"</c:if>>请选择</option>
+									<option value="1" <c:if test="${category eq 1 }">selected="selected"</c:if>>功能研发</option>
+									<option value="2" <c:if test="${category eq 2 }">selected="selected"</c:if>>BUG修复</option>
 									</select></td>
 							</tr>
 							<tr>
@@ -154,6 +156,11 @@ $(function() {
 									title : '所属项目',
 									width : 60,
 								},{
+									field : 'userGroupID',
+									title : '所属用户组',
+									width : 60,
+									hidden : true,
+								},{
 									field : 'createUserName',
 									title : '创建用户',
 									width : 60,
@@ -222,9 +229,11 @@ $(function() {
 									width : 60,
 									formatter : function(value, row, index){
 										var str="";
-										str+="<a href='${path}/taskModule/toEditTask.php?taskID="+row.id+"'>编辑</a>";
-										str+="&nbsp;&nbsp;<a href='${path}/taskModule/toTaskDetail.php?taskID="+row.id+"'>详情</a>";
-										str+="&nbsp;&nbsp;<a href='${path}/taskModule/toTaskLog.php?taskID="+row.id+"'>日志</a>";
+										if($("#curGroup").val()==1||row.userGroupID==$("#curGroup").val()){
+											str+="<a href='${path}/taskModule/toEditTask.php?taskID="+row.id+"'>编辑</a>&nbsp;&nbsp;";
+										}
+										str+="<a href='${path}/taskModule/toTaskDetail.php?taskID="+row.id+"'>详情</a>&nbsp;&nbsp;";
+										str+="<a href='${path}/taskModule/toTaskLog.php?taskID="+row.id+"'>日志</a>";
 										return str;
 									}
 								}] ],

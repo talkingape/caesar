@@ -80,7 +80,7 @@
 			</table>
 		</form>
 		<div align="right"><a class="easyui-linkbutton" style="width: 80px;"
-					href="javascript:void(0)" onclick="submit()">添加项目</a></div>
+					href="javascript:void(0)" onclick="submit()">添加任务</a></div>
 	</fieldset>
 </div>
 </body>
@@ -103,7 +103,7 @@ function submit(){
         success: function(data){
         	if(data=='success'){
         		refreshAfterCloseShow("添加成功",800);
-        		window.location.href="{path}/projectModule/toTaskList.php";
+        		window.location.href="${path}/taskModule/toTaskList.php";
         	}else if(data=='failed'){
         		refreshAfterCloseShow("添加失败",800);
         	}else{

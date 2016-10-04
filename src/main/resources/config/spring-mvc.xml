@@ -22,6 +22,7 @@
 	</bean>
 	<bean id="mappingStringHttpMessageConverter"
 		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8"/>
 	</bean>
 	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean

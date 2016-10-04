@@ -27,4 +27,6 @@ public interface TaskInfoMapper {
 	HashMap<String, Object> getTaskOverView(int taskID);
 
 	HashMap<String, Object> getTaskDetail(int taskID);
+	
+	List<HashMap<String,Object>> getOverView(int userID);
 }

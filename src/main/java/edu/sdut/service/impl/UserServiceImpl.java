@@ -91,11 +91,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Boolean isExistUser(String name) {
-		int id = userInfoMapper.isExistUser(name);
-		if (id>0) {
-			return true;
-		}else {
+		Integer id = userInfoMapper.isExistUser(name);
+		if (id==null) {
 			return false;
+		}else {
+			return true;
 		}
 	}
 
@@ -121,5 +121,32 @@ public class UserServiceImpl implements UserService{
 	public List<HashMap<String, Object>> getUserByProject(int projectID) {
 		List<HashMap<String, Object>> userList = userInfoMapper.getUserByProject(projectID);
 		return userList;
+	}
+
+	@Override
+	public UserInfo getUserInfoByID(int id) {
+		UserInfo userInfo = userInfoMapper.selectByPrimaryKey(id);
+		return userInfo;
+	}
+
+	@Override
+	public boolean updateByPrimaryKeySelective(UserInfo record) {
+		int sign = userInfoMapper.updateByPrimaryKeySelective(record);
+		if(sign>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getLoginLog(HashMap<String,Object> user) {
+		List<HashMap<String, Object>> loginLog = userLoginLogMapper.getLoginLog(user);
+		return loginLog;
+	}
+
+	@Override
+	public Long getLoginLogCount(int userID) {
+		Long loginLogCount = userLoginLogMapper.getLoginLogCount(userID);
+		return loginLogCount;
 	}
 }

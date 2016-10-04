@@ -140,11 +140,13 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public boolean editTask(TaskInfo taskInfo,int userID) {
 		TaskInfo preTask = taskInfoMapper.selectByPrimaryKey(taskInfo.getId());
-		int sign = taskInfoMapper.updateByPrimaryKey(taskInfo);
+		int sign = taskInfoMapper.updateByPrimaryKeySelective(taskInfo);
 		if(sign>0){
 			TaskLog taskLog=new TaskLog();
 			taskLog.setPreStatus(preTask.getStatus());
 			taskLog.setAfterStatus(taskInfo.getStatus());
+			taskLog.setPreCompletion(preTask.getCompletion());
+			taskLog.setAfterCompletion(taskInfo.getCompletion());
 			taskLog.setOperator(userID);
 			taskLog.setDescribe("编辑项目");
 			taskLog.setOperateTime(new Date());
@@ -172,6 +174,12 @@ public class TaskServiceImpl implements TaskService{
 	public List<HashMap<String, Object>> getTaskLog(int taskID) {
 		List<HashMap<String, Object>> taskLog = taskLogMapper.getTaskLog(taskID);
 		return taskLog;
+	}
+
+	@Override
+	public List<HashMap<String,Object>> getOverView(int userID) {
+		List<HashMap<String,Object>> overView = taskInfoMapper.getOverView(userID);
+		return overView;
 	}
 
 }

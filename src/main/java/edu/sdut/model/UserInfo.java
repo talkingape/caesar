@@ -21,7 +21,7 @@ public class UserInfo implements Serializable{
 
     private Integer extActId;
 
-    private Integer tel;
+    private String tel;
 
     private String email;
 
@@ -75,11 +75,11 @@ public class UserInfo implements Serializable{
         this.extActId = extActId;
     }
 
-    public Integer getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Integer tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 

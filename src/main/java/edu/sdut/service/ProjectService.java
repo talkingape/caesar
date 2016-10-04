@@ -27,4 +27,6 @@ public interface ProjectService {
 	public boolean editProject(ProjectInfo projectInfo,int userID);
 	
 	public List<HashMap<String,Object>> getProjectLog(int projectID);
+	
+	public List<HashMap<String,Object>> getOverView(int userID);
 }

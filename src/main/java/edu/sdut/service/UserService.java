@@ -31,4 +31,12 @@ public interface UserService {
 	public List<HashMap<String,Object>> getUserByGroup(int groupID);
 	
 	public List<HashMap<String,Object>> getUserByProject(int projectID);
+	
+	public UserInfo getUserInfoByID(int id);
+	
+	public boolean updateByPrimaryKeySelective(UserInfo record);
+	
+	public List<HashMap<String,Object>> getLoginLog(HashMap<String,Object> user);
+	
+	public Long getLoginLogCount(int userID);
 }

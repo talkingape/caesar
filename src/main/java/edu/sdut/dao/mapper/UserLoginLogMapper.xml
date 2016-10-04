@@ -90,4 +90,23 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getLoginLog" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  	SELECT
+		login_time loginTime,
+		login_ip loginIP
+	FROM
+		user_login_log
+	WHERE user_id=#{userID}
+	ORDER BY loginTime desc
+	<if test="begin!=null and step!=null">
+		LIMIT #{begin},#{step}
+	</if>
+  </select>
+   <select id="getLoginLogCount" parameterType="java.lang.Integer" resultType="java.lang.Long">
+  	SELECT
+		count(*)
+	FROM
+		user_login_log
+	WHERE user_id=#{userID}
+  </select>
 </mapper>

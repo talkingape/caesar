@@ -8,7 +8,7 @@
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="actor_id" property="actorId" jdbcType="INTEGER" />
     <result column="ext_act_id" property="extActId" jdbcType="INTEGER" />
-    <result column="tel" property="tel" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -32,7 +32,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{groupId,jdbcType=INTEGER}, #{actorId,jdbcType=INTEGER}, #{extActId,jdbcType=INTEGER}, 
-      #{tel,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="edu.sdut.model.UserInfo" >
@@ -86,7 +86,7 @@
         #{extActId,jdbcType=INTEGER},
       </if>
       <if test="tel != null" >
-        #{tel,jdbcType=INTEGER},
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
@@ -115,7 +115,7 @@
         ext_act_id = #{extActId,jdbcType=INTEGER},
       </if>
       <if test="tel != null" >
-        tel = #{tel,jdbcType=INTEGER},
+        tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
@@ -133,7 +133,7 @@
       group_id = #{groupId,jdbcType=INTEGER},
       actor_id = #{actorId,jdbcType=INTEGER},
       ext_act_id = #{extActId,jdbcType=INTEGER},
-      tel = #{tel,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -146,6 +146,7 @@
   </select>
   <select id="getUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
   	SELECT
+  		ui.id,
 		ui.name userName,
 		ui.tel,
 		ui.email,

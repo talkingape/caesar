@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html;charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@include file="/jsp/header.jsp"%>
+<%@ page language="java" import="edu.sdut.model.UserInfo"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="curUser" value='<%=(UserInfo)request.getSession().getAttribute("user") %>'/>
 <title>项目列表</title>
 </head>
 <html>
 <body>
 <%@include file="/jsp/topBar.jsp"%>
+<input id="curGroup" hidden="hidden" value="${curUser.groupId }">
 	<div style="width: 81%; margin-left: auto; margin-right: auto;margin-top: 1%">
 		<fieldset style="border: 1px blue dashed">
 			<legend>查询条件</legend>
@@ -107,6 +110,11 @@ $(function() {
 									title : '创建用户',
 									width : 60,
 								},{
+									field : 'userGroupID',
+									title : '所属用户组',
+									width : 60,
+									hidden : true,
+								},{
 									field : 'userGroup',
 									title : '所属用户组',
 									width : 60,
@@ -143,9 +151,11 @@ $(function() {
 									width : 60,
 									formatter : function(value, row, index){
 										var str="";
-										str+="<a href='${path}/projectModule/toEditProject.php?projectID="+row.id+"'>编辑</a>";
-										str+="&nbsp;&nbsp;<a href='${path}/projectModule/toProjectDetail.php?projectID="+row.id+"'>详情</a>";
-										str+="&nbsp;&nbsp;<a href='${path}/projectModule/toProjectLog.php?projectID="+row.id+"'>日志</a>";
+										if($("#curGroup").val()==1||row.userGroupID==$("#curGroup").val()){
+											str+="<a href='${path}/projectModule/toEditProject.php?projectID="+row.id+"'>编辑</a>&nbsp;&nbsp;";
+										}
+										str+="<a href='${path}/projectModule/toProjectDetail.php?projectID="+row.id+"'>详情</a>&nbsp;&nbsp;";
+										str+="<a href='${path}/projectModule/toProjectLog.php?projectID="+row.id+"'>日志</a>&nbsp;&nbsp;";
 										return str;
 									}
 								}] ],

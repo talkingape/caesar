@@ -107,7 +107,7 @@ function login() {
 								} else if (data == 'failed') {
 									show('用户名或密码错误');
 								} else if (data == 'success') {
-									window.location.href = "../userModule/toUserList.php";
+									window.location.href = "../userModule/toOverView.php";
 								}
 							}
 						});

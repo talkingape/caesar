@@ -11,20 +11,20 @@
 <div style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 1%">
 	<fieldset>
 		<legend>编辑项目</legend>
-		<form>
+		<form id="editProject">
 			<table>
 				<tbody>
 					<tr hidden="true">
 						<td>项目ID</td><td><input class="easyui-textbox"
-							id="projectID" name="projectID" value="${projectDetail.id }" disabled="disabled" style="width: 50%; height: 24px;"></td>
+							id="projectID" name="projectID" value="${projectDetail.id }" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
 						<td>项目名称</td><td><input class="easyui-textbox"
-							id="userID" name="userID" value="${projectDetail.title }" disabled="disabled" style="width: 50%; height: 24px;"></td>
+							id="title" name="title" value="${projectDetail.title }" disabled="disabled" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
 						<td>项目编码</td><td><input class="easyui-textbox"
-							id="userID" name="userID" value="${projectDetail.code }" disabled="disabled" style="width: 50%; height: 24px;"></td>
+							id="code" name="code" value="${projectDetail.code }" disabled="disabled" style="width: 50%; height: 24px;"></td>
 					</tr>
 					<tr>
 						<td>分配组别</td><td><select id="userGroup" disabled="disabled"
@@ -51,14 +51,16 @@
 							</select></td>
 					</tr>
 					<tr>
-						<td>描述</td><td><textarea rows="12" cols="126">${projectDetail.describe }</textarea></td>
+						<td>描述</td><td><textarea id="p_describe" name="p_describe" rows="12" cols="126">${projectDetail.p_describe }</textarea></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>上传文件</td><td><input type="file"></td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 		</form>
+		<div align="right" style="float: right;"><a class="easyui-linkbutton" style="width: 80px;"
+					href="javascript:void(0)" onclick="submit()">确认编辑</a></div>
 	</fieldset>
 </div>
 </body>
@@ -70,5 +72,22 @@ $(function(){
 	$("#userGroup").select2();
 	$("#curStatus").select2();
 });
+function submit(){
+	$.ajax({
+        type: "POST",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        url: "editProject.php?"+$("#editProject").serialize(),
+        success: function(data){
+        	if(data=='success'){
+        		refreshAfterCloseShow("添加成功",800);
+        		window.location.href="${path}/projectModule/toProjectList.php";
+        	}else if(data=='failed'){
+        		refreshAfterCloseShow("添加失败",800);
+        	}else{
+        		refreshAfterCloseShow("未知错误",800);
+        	}
+        }
+	});
+}
 </script>
 </html>

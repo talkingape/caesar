@@ -29,9 +29,9 @@
 			<div style="margin-left: 24px;margin-top: 9px">
 				<table>
 					<tbody>
-						<tr><td><a href="javascript:void(0)">功能开发</a></td><td><c:if test="${!empty projectOverView.funcOpen}">${projectOverView.funcOpen}</c:if><c:if test="${empty projectOverView.funcOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.funcTotal}">${projectOverView.funcTotal}</c:if><c:if test="${empty projectOverView.funcTotal}">0</c:if>总数</td></tr>
-						<tr><td><a href="javascript:void(0)">BUG修复</a></td><td><c:if test="${!empty projectOverView.bugOpen}">${projectOverView.bugOpen}</c:if><c:if test="${empty projectOverView.bugOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.bugTotal}">${projectOverView.bugTotal}</c:if><c:if test="${empty projectOverView.bugTotal}">0</c:if>总数</td></tr>
-						<tr><td colspan="2"><a href="javascript:void(0)">查看所有问题</a></td></tr>
+						<tr><td><a href="${path }/taskModule/toTaskList.php?category=1">功能开发</a></td><td><c:if test="${!empty projectOverView.funcOpen}">${projectOverView.funcOpen}</c:if><c:if test="${empty projectOverView.funcOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.funcTotal}">${projectOverView.funcTotal}</c:if><c:if test="${empty projectOverView.funcTotal}">0</c:if>总数</td></tr>
+						<tr><td><a href="${path }/taskModule/toTaskList.php?category=2">BUG修复</a></td><td><c:if test="${!empty projectOverView.bugOpen}">${projectOverView.bugOpen}</c:if><c:if test="${empty projectOverView.bugOpen}">0</c:if> 打开/<c:if test="${!empty projectOverView.bugTotal}">${projectOverView.bugTotal}</c:if><c:if test="${empty projectOverView.bugTotal}">0</c:if>总数</td></tr>
+						<tr><td colspan="2"><a href="${path }/taskModule/toTaskList.php?category=0">查看所有问题</a></td></tr>
 					</tbody>
 				</table>
 			</div>
@@ -44,7 +44,7 @@
 						<tr><td>开发人员</td>
 							<td><c:forEach var="user" items="${userList}">
 									<c:if test="${user.actor eq 4 }">
-										<a href="javascript:void(0)">${user.name}</a>
+										<a href="${path }/userModule/toUserDetail.php?userID=${user.id}">${user.name}</a>
 									</c:if>
 								</c:forEach>
 							</td>

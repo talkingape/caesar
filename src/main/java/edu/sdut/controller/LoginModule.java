@@ -55,5 +55,5 @@ public class LoginModule {
 		request.getSession().setAttribute("user", null);
 		return "login";
 	}
-
+	
 }

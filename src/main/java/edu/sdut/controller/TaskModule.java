@@ -72,13 +72,18 @@ public class TaskModule {
 		taskInfo.setDescribe(describe);
 		taskInfo.setCreateUserId(user.getId());
 		taskInfo.setPreUserId(user.getId());
-		taskService.addTask(taskInfo);
-		return "false";
+		boolean sign = taskService.addTask(taskInfo);
+		if (sign) {
+			return "success";
+		}
+		return "failed";
 	}
 
 	@RequestMapping("/toTaskList")
 	public String toTaskList(HttpServletRequest request) {
 		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+		String category = request.getParameter("category");
+		request.setAttribute("category", category);
 		List<HashMap<String, Object>> projectList = projectService.getProjectByGroup(user.getGroupId());
 		List<HashMap<String, Object>> userList = userService.getUserByGroup(user.getGroupId());
 		request.setAttribute("projectList", projectList);
@@ -118,6 +123,7 @@ public class TaskModule {
 		String priority = request.getParameter("priority");
 		String expectTime = request.getParameter("expectTime");
 		String taskTime = request.getParameter("taskTime");
+		String completion = request.getParameter("completion");
 		String describe = request.getParameter("describe");
 		TaskInfo taskInfo = new TaskInfo();
 		taskInfo.setId(Integer.parseInt(taskID));
@@ -129,6 +135,7 @@ public class TaskModule {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		taskInfo.setCompletion(Integer.parseInt(completion));
 		taskInfo.setTaskTime(Integer.parseInt(taskTime));
 		taskInfo.setPriority(Integer.parseInt(priority));
 		boolean sign = taskService.editTask(taskInfo, user.getId());

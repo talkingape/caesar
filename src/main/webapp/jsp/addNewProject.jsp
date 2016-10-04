@@ -40,9 +40,9 @@
 					<tr>
 						<td>描述</td><td><textarea id="describe" name="describe" rows="12" cols="126"></textarea></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>上传文件</td><td><input type="file"></td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 		</form>
@@ -67,7 +67,7 @@ function submit(){
         success: function(data){
         	if(data=='success'){
         		refreshAfterCloseShow("添加成功",800);
-        		window.location.href="{path}/projectModule/toProjectList.php";
+        		window.location.href="${path}/projectModule/toProjectList.php";
         	}else if(data=='failed'){
         		refreshAfterCloseShow("添加失败",800);
         	}else{

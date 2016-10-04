@@ -27,4 +27,6 @@ public interface TaskService {
 	public HashMap<String, Object> getTaskDetail(int taskID);
 	
 	public List<HashMap<String, Object>> getTaskLog(int taskID);
+	
+	public List<HashMap<String,Object>> getOverView(int userID);
 }

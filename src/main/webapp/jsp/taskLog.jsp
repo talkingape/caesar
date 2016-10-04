@@ -3,13 +3,13 @@
 <%@include file="/jsp/header.jsp"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<title>项目日志</title>
+<title>任务日志</title>
 </head>
 <html>
 <body>
 <%@include file="/jsp/topBar.jsp"%>
 <div align="center" style="height: auto; width: 91%; margin-left: auto; margin-right: auto; margin-top: 1%">
-<div><font size="7">项目名称:${taskOverView.title }</font></div>
+<div><font size="7">任务名称:${taskOverView.title }</font></div>
 	<table style="border: 1px black solid;">
 		<tr style="border: 1px black solid;width: 80%;color: blue">
 			<td style="width: 120">序号</td>
@@ -24,7 +24,7 @@
 		<c:forEach items="${taskLog }" var="log" varStatus="index">
 			<tr <c:if test="${index.index%2==0 }">style="color:gray"</c:if>>
 				<td>${index.count }</td>
-				<td>${log.operater }</td>
+				<td>${log.operator }</td>
 				<td><fmt:formatDate value="${log.operateTime }" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 				<td>
 					<c:choose>
@@ -37,10 +37,10 @@
 				</td>
 				<td>
 					<c:choose>
-						<c:when test="${log.preStatus==1 }">新建</c:when>
-						<c:when test="${log.preStatus==2 }">开发/修复中</c:when>
-						<c:when test="${log.preStatus==3 }">已上线</c:when>
-						<c:when test="${log.preStatus==4 }">已关闭</c:when>
+						<c:when test="${log.afterStatus==1 }">新建</c:when>
+						<c:when test="${log.afterStatus==2 }">开发/修复中</c:when>
+						<c:when test="${log.afterStatus==3 }">已上线</c:when>
+						<c:when test="${log.afterStatus==4 }">已关闭</c:when>
 						<c:otherwise>未知状态</c:otherwise>
 					</c:choose>
 				</td>

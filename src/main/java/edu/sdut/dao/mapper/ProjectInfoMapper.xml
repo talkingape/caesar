@@ -35,9 +35,9 @@
       #{status,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="edu.sdut.model.ProjectInfo" >
-	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-	  SELECT @@IDENTITY
+  <insert id="insertSelective" parameterType="edu.sdut.model.ProjectInfo">
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID() AS id
 	</selectKey>
     insert into project_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -146,6 +146,7 @@
 		pi.id,
 		pi.code,
 		pi.title,
+		pi.group_id userGroupID,
 		ui.name userName,
 		ug.name userGroup,
 		pi.status,
@@ -218,5 +219,17 @@
 		project_info pi
 	LEFT JOIN user_info ui ON pi.create_user_id = ui.id
 	WHERE pi.id=#{projectID}
+  </select>
+  <select id="getOverView" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		pi.id,
+		pi.code,
+		pi.title,
+		pi.status
+	FROM
+		project_info pi
+	JOIN user_group ug ON pi.group_id = ug.id
+	JOIN user_info ui ON ug.id = ui.group_id
+	WHERE ui.id=#{userID}
   </select>
 </mapper>

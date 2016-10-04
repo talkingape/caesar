@@ -1,5 +1,8 @@
 package edu.sdut.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import edu.sdut.model.UserLoginLog;
 
 public interface UserLoginLogMapper {
@@ -14,4 +17,8 @@ public interface UserLoginLogMapper {
     int updateByPrimaryKeySelective(UserLoginLog record);
 
     int updateByPrimaryKey(UserLoginLog record);
+    
+    List<HashMap<String,Object>> getLoginLog(HashMap<String,Object> user);
+    
+    Long getLoginLogCount(int userID);
 }

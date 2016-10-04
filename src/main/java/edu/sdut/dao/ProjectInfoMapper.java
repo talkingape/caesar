@@ -23,4 +23,6 @@ public interface ProjectInfoMapper {
 	Long getProjectListCount(HashMap<String, Object> param);
 	
 	HashMap<String,Object> getProjectDetailByID(int projectID);
+	
+	List<HashMap<String,Object>> getOverView(int userID);
 }

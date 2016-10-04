@@ -243,6 +243,7 @@
 		ti.code,
 		ti.title,
 		ti.category,
+		pi.group_id userGroupID,
 		pi.title projectTitle,
 		uicr.name createUserName,
 		uicu.name currentUserName,
@@ -364,5 +365,18 @@
 	JOIN user_info ui ON ti.current_user_id=ui.id
 	JOIN project_info pi ON ti.project_id=pi.id
 	WHERE ti.id=#{taskID}
+  </select>
+    <select id="getOverView" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  	SELECT
+		ti.id,
+		ti.code,
+		ti.title,
+		ti.category,
+		ti.status,
+		ti.completion
+	FROM
+		task_info ti
+	JOIN user_info ui ON ti.current_user_id = ui.id
+	WHERE ui.id=#{userID}
   </select>
 </mapper>

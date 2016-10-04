@@ -3,6 +3,7 @@
 <%@include file="/jsp/header.jsp"%>
 <head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="curUser" value='<%=(UserInfo)request.getSession().getAttribute("user") %>'/>
 <title>用户列表</title>
 </head>
 <html>
@@ -54,8 +55,10 @@
 			<div style="float: right; height: 150px;">
 				<a class="easyui-linkbutton" style="width: 80px; margin-top: 124px"
 					href="javascript:void(0)" onclick="submit()">查询</a>
-				<a class="easyui-linkbutton" style="width: 80px; margin-top: 124px"
-					href="javascript:void(0)" onclick="addUser()">新增用户</a>
+				<c:if test="${curUser.groupId eq 1 }">
+					<a class="easyui-linkbutton" style="width: 80px; margin-top: 124px"
+						href="javascript:void(0)" onclick="addUser()">新增用户</a>
+				</c:if>
 			</div>
 		</fieldset>
 	</div>
@@ -86,6 +89,12 @@ $(function() {
 						rownumbers : true,
 						singleSelect : false,
 						columns : [ [
+								{
+									field : 'id',
+									title : '用户名',
+									width : 60,
+									hidden : true,
+								},
 								{
 									field : 'userName',
 									title : '用户名',
@@ -119,8 +128,8 @@ $(function() {
 									width : 60,
 									formatter : function(value, row, index){
 										var str="";
-										str+="<a href='javascript:void(0)'>编辑</a>";
-										str+="&nbsp;&nbsp;<a href='javascript:void(0)'>详情</a>";
+										str+="<a href='${path}/userModule/toEditUser.php?userID="+row.id+"'>编辑</a>";
+										str+="&nbsp;&nbsp;<a href='${path}/userModule/toUserDetail.php?userID="+row.id+"'>详情</a>";
 										return str;
 									}
 								}] ],
